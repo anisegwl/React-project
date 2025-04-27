@@ -31,6 +31,21 @@
   gap: 1rem;
 }
 
+.divButton{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-gap: 1rem;
+  margin: 0 auto;
+  max-width: 600px;
+  padding: 1rem;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);
