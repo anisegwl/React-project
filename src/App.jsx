@@ -6,29 +6,42 @@ import './App.css'
 function App() {
   const [count, setCount] = useState(0);
 
-  const handleIncrement = () =>{
+  const handleIncrement = () => {
     setCount(count + 1);
   };
-  const handleDecrement = () =>{
-    setCount(count-1);
+  const handleDecrement = () => {
+    setCount(count - 1);
   };
+
+  const handleMultiplication = () => {
+    setCount(count * count)
+  };
+
+  const handleDivide = () => {
+    setCount(count / count);
+  }
+
+  const handleRefresh = () => {
+    setCount(count * 0);
+  }
   return (
     <>
-      
-      
-      <div className="card">
-        <button onClick={handleIncrement}>
-          Click Me to Increase
-        </button>
-        <button onClick={handleDecrement}> 
-          Click Me to Decrease </button>
-        <p>
-          You click {count} time in click me button
-        </p>
+    <div className='buttons'>
+      <button onClick={handleIncrement}>ADD</button>
+      <button onClick={handleDecrement}>Subtract</button>
+      <button onClick={handleMultiplication}>Multiply</button>
+      <button onClick={handleDivide}>Divide</button>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
+      <div className="refreshBtn">
+        <button onClick={handleRefresh}>Refresh</button>
+      </div>
+
+
+
+      <p>
+        Result = {count}
       </p>
+
     </>
   )
 }
