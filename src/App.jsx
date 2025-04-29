@@ -2,14 +2,12 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import Navbar from './components/Navbar';
+import Banner from './components/Banner';
+
 
 function App() {
   const [count, setCount] = useState(0);
-
-  const handleNumberClick = (num) => {
-    setCount(num);
-  };
-
 
   const handleIncrement = () => {
     setCount(count + 1);
@@ -31,30 +29,25 @@ function App() {
   }
   return (
     <>
-
-      <div className='divButton'>
-        {/* Number buttons */}
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
-          <button key={num} onClick={() => handleNumberClick(num)}>
-            {num}
-          </button>
-        ))}
-      </div>
-      <div className='buttons'>
+<Navbar/>
+<br></br>
+<Banner/>
+      <div className='container mt-5'>
         <button onClick={handleIncrement}>ADD</button>
         <button onClick={handleDecrement}>Subtract</button>
         <button onClick={handleMultiplication}>Multiply</button>
         <button onClick={handleDivide}>Divide</button>
       </div>
-      <div className="refreshBtn">
+      <div className=" container refreshBtn">
         <button onClick={handleRefresh}>Refresh</button>
       </div>
-
-
-
-      <p>
+      <p className='container'>
         Result = {count}
       </p>
+
+      <div className='container'>
+        <h4>Welcome back to login page</h4>
+      </div>
 
     </>
   )
