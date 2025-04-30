@@ -1,13 +1,18 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import Navbar from './components/Navbar';
 import Banner from './components/Banner';
+import Card from './components/Card';
+
 
 
 function App() {
   const [count, setCount] = useState(0);
+  const [name, SetName] = useState("Anise")
+
+  const userName = ()=>{
+    SetName("Tung Tung Sahur");
+  }
 
   const handleIncrement = () => {
     setCount(count + 1);
@@ -32,6 +37,7 @@ function App() {
 <Navbar/>
 <br></br>
 <Banner/>
+<Card/>
       <div className='container mt-5'>
         <button onClick={handleIncrement}>ADD</button>
         <button onClick={handleDecrement}>Subtract</button>
@@ -44,6 +50,11 @@ function App() {
       <p className='container'>
         Result = {count}
       </p>
+
+      <button onClick={userName}>Click to change the Name</button>
+      <p> Your Name is {name}</p>
+      
+    
 
       <div className='container'>
         <h4>Welcome back to login page</h4>

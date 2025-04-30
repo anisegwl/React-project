@@ -2,7 +2,8 @@ import React from 'react';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css/skyblue';
 import '@splidejs/react-splide/css';
-
+import image1 from "../assets/image1.webp"
+import image2 from "../assets/image2.webp"
 
 export default () => {
   return (
@@ -14,10 +15,10 @@ export default () => {
       aria-label="My Favorite Images"
     >
       <SplideSlide>
-        <img src="{image1}" alt="Image 1"/>
+        <img src={image1} alt="Image 1"/>
       </SplideSlide>
       <SplideSlide>
-        <img src="image2.jpg" alt="Image 2"/>
+        <img src={image2} alt="Image 2"/>
       </SplideSlide>
       <SplideSlide>
         <img src="image3.jpg" alt="Image 3"/>
