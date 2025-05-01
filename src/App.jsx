@@ -1,67 +1,34 @@
-import { useState } from 'react'
-import './App.css'
-import Navbar from './components/Navbar';
-import Banner from './components/Banner';
-import Card from './components/Card';
+import { useState } from "react";
 
+import "./App.css";
+import Navbar from "./components/Navbar";
 
+import HeroSection from "./components/Banner";
+import Card from "./components/card";
 
 function App() {
-  const [count, setCount] = useState(0);
-  const [name, SetName] = useState("Anise")
+  const [text, setText] = useState("Dark Mode");
+  const [mode, setMode] = useState("light");
 
-  const userName = ()=>{
-    SetName("Tung Tung Sahur");
-  }
-
-  const handleIncrement = () => {
-    setCount(count + 1);
-  };
-  const handleDecrement = () => {
-    setCount(count - 1);
-  };
-
-  const handleMultiplication = () => {
-    setCount(count * count)
+  const toggleMode = () => {
+    if (mode === "light") {
+      setMode("dark");
+      setText("Light Mode");
+    } else {
+      setMode("light");
+      setText("Dark Mode");
+    }
   };
 
-  const handleDivide = () => {
-    setCount(count / count);
-  }
+  let brandName = "Hamro-bazzar";
 
-  const handleRefresh = () => {
-    setCount(count * 0);
-  }
   return (
     <>
-<Navbar/>
-<br></br>
-<Banner/>
-<Card/>
-      <div className='container mt-5'>
-        <button onClick={handleIncrement}>ADD</button>
-        <button onClick={handleDecrement}>Subtract</button>
-        <button onClick={handleMultiplication}>Multiply</button>
-        <button onClick={handleDivide}>Divide</button>
-      </div>
-      <div className=" container refreshBtn">
-        <button onClick={handleRefresh}>Refresh</button>
-      </div>
-      <p className='container'>
-        Result = {count}
-      </p>
-
-      <button onClick={userName}>Click to change the Name</button>
-      <p> Your Name is {name}</p>
-      
-    
-
-      <div className='container'>
-        <h4>Welcome back to login page</h4>
-      </div>
-
+      <Navbar brandName={brandName} toggleMode={toggleMode} text={text} mode={mode} />
+      <HeroSection />
+      <Card toggleMode={toggleMode} mode={mode} />
     </>
-  )
+  );
 }
 
-export default App
+export default App;

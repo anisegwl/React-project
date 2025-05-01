@@ -4,3 +4,4 @@ let c = "CAT"
 let d = "sugarcane"
 
 export default c ;
+export {a,b,d};
