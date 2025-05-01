@@ -7,16 +7,20 @@ import HeroSection from "./components/Banner";
 import Card from "./components/card";
 
 function App() {
-  const [text, setText] = useState("Dark Mode");
+  const [btntext, setBtnText] = useState("Dark Mode");
   const [mode, setMode] = useState("light");
+  const [text, setText] = useState("dark");
+  
 
   const toggleMode = () => {
     if (mode === "light") {
       setMode("dark");
-      setText("Light Mode");
+      setBtnText("Light Mode");
+      setText("dark")
     } else {
       setMode("light");
-      setText("Dark Mode");
+      setBtnText("Dark Mode");
+      setText("light");
     }
   };
 
@@ -24,9 +28,9 @@ function App() {
 
   return (
     <>
-      <Navbar brandName={brandName} toggleMode={toggleMode} text={text} mode={mode} />
+      <Navbar brandName={brandName} toggleMode={toggleMode}  mode={mode} btntext ={btntext} />
       <HeroSection />
-      <Card toggleMode={toggleMode} mode={mode} />
+      <Card toggleMode={toggleMode} mode={mode} text={text} />
     </>
   );
 }

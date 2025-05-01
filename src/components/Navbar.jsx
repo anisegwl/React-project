@@ -34,7 +34,7 @@ const Navbar = (props) => {
       </ul>
       <form className="d-flex">
         <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-        <button onClick = {props.toggleMode}className="btn btn-outline-success" type='button'>{props.text}</button>
+        <button onClick = {props.toggleMode}className="btn btn-outline-success" type='button'>{props.btntext}</button>
       </form>
     </div>
   </div>
