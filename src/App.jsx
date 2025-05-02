@@ -7,6 +7,8 @@ import HeroSection from "./components/Banner";
 import Card from "./components/Card";
 import Alert from "./components/Alert";
 import { toast, ToastContainer } from "react-toastify"
+import Class from "./components/Class";
+import Function from "./components/Function";
 
 function App() {
   const [btntext, setBtnText] = useState("Dark Mode");
@@ -28,7 +30,7 @@ function App() {
   };
 
   const toggleMode = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
 
     if (mode === "light") {
       setMode("dark");
@@ -68,6 +70,8 @@ function App() {
       <Alert alert={alert} />
       <HeroSection />
       <Card toggleMode={toggleMode} mode={mode} text={text} />
+      <Class/>
+      <Function toggleMode ={toggleMode}/>
     </>
   );
 }
