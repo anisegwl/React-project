@@ -1,6 +1,6 @@
 import React from "react";
 import Banner from "./Banner";
-import Card from "./card";
+import Card from "./Card";
 
 const Home = () => {
   return (

@@ -103,9 +103,9 @@ const Navbar = (props) => {
                 <button
                   type="button"
                   onClick={props.toggleMode}
-                  className="btn btn-outline-success"
+                  className="mode-btn btn-outline-success"
                 >
-                  {props.mode === 'light' ? 'Enable Dark Mode' : 'Enable Light Mode'}
+                  {props.mode === 'light' ? 'Dark Mode' : 'Light Mode'}
                 </button>
               </div>
             </form>
