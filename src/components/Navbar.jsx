@@ -5,7 +5,7 @@ const Navbar = (props) => {
   return (
     <div>
       <nav
-        className={`navbar navbar-expand-lg navbar-${props.mode} bg-${props.mode}`} //template literal
+        className={`navbar navbar-expand-lg navbar-${props.mode} bg-${props.mode}`}
       >
         <div className="container-fluid">
           <Link className="navbar-brand" to="/">
@@ -37,6 +37,16 @@ const Navbar = (props) => {
               <li className="nav-item">
                 <Link className="nav-link" to="/contact-us">
                   Contact Us
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/login">
+                  Login
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/register">
+                  SignUp
                 </Link>
               </li>
               <li className="nav-item dropdown">
@@ -91,10 +101,11 @@ const Navbar = (props) => {
               />
               <div className="toggle-button">
                 <button
+                  type="button"
                   onClick={props.toggleMode}
                   className="btn btn-outline-success"
                 >
-                  {props.text}
+                  {props.mode === 'light' ? 'Enable Dark Mode' : 'Enable Light Mode'}
                 </button>
               </div>
             </form>
