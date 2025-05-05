@@ -22,7 +22,7 @@ const Login = () => {
                   <label htmlFor="password" className="form-label">Password</label>
                   <input type="password" className="input-form form-control" id="password" placeholder="Enter your password" />
                 </div>
-                <button className="form-btn" type="submit">SIGN UP</button>
+                <button className="form-btn" type="submit">LOGIN</button>
                 
                 <p className="mt-3">
                   Don't Have an Account? <Link to="/register" className="link">Register Here!</Link>

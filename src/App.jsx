@@ -37,7 +37,7 @@ function App() {
     setTimeout(() => setAlert(null), 2000);
   };
 
-  const brandName = "Hamro-bazzar";
+  const brandName = "UOIT-MASR";
 
   return (
     <>
@@ -61,7 +61,7 @@ function App() {
           toggleMode={toggleMode}
           alert={alert}
         />
-        <Alert alert={alert} />
+
 
         <Routes>
           <Route path="/" element={<Home />} />
@@ -75,6 +75,6 @@ function App() {
       </Router>
     </>
   );
-}76
+} 
 
 export default App;
