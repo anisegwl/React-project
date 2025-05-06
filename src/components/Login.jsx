@@ -5,6 +5,7 @@ import '../styles/login.css';
 
 const Login = () => {
   return (
+    <div className='loginpage'>
      <div className="container mt-5">
           <div className="row">
             <div className="col-md-6 mb-4">
@@ -30,6 +31,7 @@ const Login = () => {
               </form>
             </div>
           </div>
+        </div>
         </div>
   );
 }

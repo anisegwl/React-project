@@ -1,0 +1,163 @@
+/* Shared container styles */
+.loginpage .container,
+.signup-container {
+  background: #ffffff;
+  padding: 30px 0px 30px 85px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Shared heading */
+.loginpage h4,
+.signup-container h4 {
+  font-size: 28px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Login image */
+.loginpage .login-img {
+  width: 100%;
+  height: auto;
+  max-height: 400px;
+  margin-top: 30px;
+  object-fit: cover;
+  border: 2px solid rgb(243, 231, 231);
+  border-radius: 20px;
+  margin-left: 60px;
+}
+
+/* Signup image */
+.signup-container .signup-img {
+  width: 100%;
+  height: auto;
+  max-height: 400px;
+  margin-top: 40px;
+  object-fit: cover;
+  border: 2px solid rgb(243, 231, 231);
+  border-radius: 20px;
+  margin-left: 60px;
+}
+
+/* Shared form layout */
+.loginpage .form-login,
+.signup-container .form-login {
+  padding: 0px 0px 0px 150px;
+}
+
+/* Shared paragraph inside form */
+.loginpage form p,
+.signup-container form p {
+  margin-right: 40%;
+  margin-left: 20px;
+}
+
+/* Shared input fields */
+.loginpage .input-form,
+.signup-container .input-form {
+  width: 100%;
+  max-width: 300px;
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  transition: box-shadow 0.3s ease;
+  margin-bottom: 15px;
+}
+
+.loginpage .input-form:focus,
+.signup-container .input-form:focus {
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Shared buttons */
+.loginpage .form-btn,
+.signup-container .form-btn {
+  width: 100%;
+  max-width: 300px;
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 16px;
+  background: linear-gradient(45deg, #4158a5, #40566d);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  margin-top: 10px;
+}
+
+.loginpage .form-btn:hover,
+.signup-container .form-btn:hover {
+  background: linear-gradient(45deg, #0056b3, #003d80);
+}
+
+/* Shared paragraph + link */
+.loginpage p,
+.signup-container p {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.loginpage p a.link,
+.signup-container p a.link {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.loginpage p a.link:hover,
+.signup-container p a.link:hover {
+  text-decoration: underline;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .loginpage .container,
+  .signup-container {
+    padding: 30px;
+  }
+
+  .loginpage h4,
+  .signup-container h4 {
+    font-size: 24px;
+  }
+
+  .loginpage .login-img,
+  .signup-container .signup-img {
+    max-height: 300px;
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .loginpage .container,
+  .signup-container {
+    padding: 20px;
+  }
+
+  .loginpage h4,
+  .signup-container h4 {
+    font-size: 22px;
+  }
+
+  .loginpage .login-img,
+  .signup-container .signup-img {
+    max-height: 250px;
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  .loginpage .container,
+  .signup-container {
+    padding: 15px;
+  }
+
+  .loginpage .input-form,
+  .signup-container .input-form,
+  .loginpage .form-btn,
+  .signup-container .form-btn {
+    max-width: 100%;
+  }
+}

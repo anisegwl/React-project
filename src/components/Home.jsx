@@ -6,7 +6,6 @@ const Home = () => {
   return (
     <div>
       <Banner />
-      <Card />
     </div>
   );
 };

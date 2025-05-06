@@ -12,11 +12,15 @@ import Home from "./components/Home";
 import Contact from "./components/contact";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
+import Services from "./components/Services";
+import Testimonial from "./components/Testimonial";
 
 function App() {
   const [text, setText] = useState("dark mode");
   const [mode, setMode] = useState("light");
   const [alert, setAlert] = useState(null);
+  const [darkModeTxt , setDarkModeTxt] = useState("dark");
+  
 
   const toggleMode = () => {
     if (mode === "dark") {
@@ -24,11 +28,13 @@ function App() {
       setText("dark mode");
       showAlert("success", "Light mode has been enabled");
       toast("Light mode enabled");
+      setDarkModeTxt("dark");
     } else {
       setMode("dark");
       setText("light mode");
       showAlert("success", "Dark mode has been enabled");
       toast("Dark mode enabled");
+      setDarkModeTxt("light");
     }
   };
 
@@ -69,9 +75,11 @@ function App() {
           <Route path="/contact-us" element={<Contact />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Signup />} />
+          <Route path ="/services" element ={<Services/>} />
+          <Route path ="/testimonials" element ={<Testimonial/>} />
         </Routes>
 
-        <Footer />
+        <Footer mode ={mode} darkModeTxt ={darkModeTxt} />
       </Router>
     </>
   );
