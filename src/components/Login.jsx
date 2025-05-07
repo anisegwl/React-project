@@ -2,10 +2,13 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import image from "../assets/loginPerson.jpg"
 import '../styles/login.css';
+import { FaBeer } from "react-icons/fa";
+import { MdLogin } from "react-icons/md";
 
 const Login = () => {
   return (
     <div className='loginpage'>
+      <h3>Lets go for a login <MdLogin/></h3>
      <div className="container mt-5">
           <div className="row">
             <div className="col-md-6 mb-4">

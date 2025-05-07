@@ -14,6 +14,8 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Services from "./components/Services";
 import Testimonial from "./components/Testimonial";
+import Userlist from "./components/Userlist";
+import Userdetail from "./components/Userdetail";
 
 function App() {
   const [text, setText] = useState("dark mode");
@@ -76,7 +78,9 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Signup />} />
           <Route path ="/services" element ={<Services/>} />
-          <Route path ="/testimonials" element ={<Testimonial/>} />
+          <Route path ="/users" element ={<Userlist/>} />
+          <Route path =":userIdid/:userName" element ={<Userdetail/>} />
+
         </Routes>
 
         <Footer mode ={mode} darkModeTxt ={darkModeTxt} />
