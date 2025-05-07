@@ -28,7 +28,6 @@ const Signup = () => {
             </div>
             
             <button className="form-btn" type="submit">REGISTER</button>
-
             <p className="mt-3">
               Already have an account? <Link to="/login" className="link">Login Here!</Link>
             </p>

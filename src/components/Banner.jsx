@@ -1,29 +1,32 @@
 import React from 'react';
-import { Splide, SplideSlide } from '@splidejs/react-splide';
-import '@splidejs/react-splide/css/skyblue';
-import '@splidejs/react-splide/css';
-import image1 from "../assets/image1.webp"
-import image2 from "../assets/image2.webp"
+import image1 from "../assets/carousel1.png"
+import image2 from "../assets/carousel2.png"
+import image3 from "../assets/carousel3.png"
+import '../styles/Carousel.css'; 
 
-export default () => {
+export default function Banner() {
   return (
-    <Splide
-    options={{
-      rewind: true,
-      gap: '1rem',
-      width: '100%',
-    }}
-    aria-label="My Favorite Images"
-  >
-    <SplideSlide>
-      <img src={image1} alt="Image 1" style={{ width: '100%', height: 'auto', objectFit: 'cover' }} />
-    </SplideSlide>
-    <SplideSlide>
-      <img src={image2} alt="Image 2" style={{ width: '100%', height: 'auto', objectFit: 'cover' }} />
-    </SplideSlide>
-    <SplideSlide>
-      <img src="image3.jpg" alt="Image 3" style={{ width: '100%', height: 'auto', objectFit: 'cover' }} />
-    </SplideSlide>
-  </Splide>
-);
+    <div id="carouselExampleFade" className="carousel slide carousel-fade custom-carousel mt-5" data-bs-ride="carousel">
+  <div className="carousel-inner">
+    <div className="carousel-item active">
+      <img src={image1} className="d-block" alt="..." />
+    </div>
+    <div className="carousel-item">
+      <img src={image2} className="d-block" alt="..." />
+    </div>
+    <div className="carousel-item">
+      <img src={image3} className="d-block" alt="..." />
+    </div>
+  </div>
+  <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+    <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span className="visually-hidden">Previous</span>
+  </button>
+  <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+    <span className="carousel-control-next-icon" aria-hidden="true"></span>
+    <span className="visually-hidden">Next</span>
+  </button>
+</div>
+
+  );
 }
