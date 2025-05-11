@@ -53,6 +53,11 @@ const Navbar = (props) => {
                 Contact Us
               </Link>
             </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/users">
+                Users
+              </Link>
+            </li>
 
             {/* Dropdown menu */}
             <li className="nav-item dropdown">

@@ -4,13 +4,25 @@ import image from "../assets/welcomeImage.jpg";
 
 
 const Signup = () => {
+
+  const [credential, setCredential] = React.useState({
+    name: "Anise",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  })
+console.log(credential.name)
+  const handleSubmit =(e)=>{
+    e.preventDefault();
+    console.log("Form submitted");
+  }
   return (
     <div className="signup-container container mt-5">
       <div className="row">
         <div className="col-md-6 mb-4">
           <img src={image} alt="Register" className="signup-img img-fluid rounded" />
         </div>
-
+    <form onSubmit={handleSubmit}>
         <div className="col-md-6">
           <center><h4 className="mb-4 mt-4">CREATE ACCOUNT</h4></center>
           <form className='form-login'>
@@ -33,6 +45,7 @@ const Signup = () => {
             </p>
           </form>
         </div>
+        </form>
       </div>
     </div>
   );
