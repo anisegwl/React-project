@@ -2,10 +2,8 @@ import { useState } from "react";
 import './styles/App.css';
 import "./styles/login.css"
 import Navbar from "./components/Navbar";
-import Alert from "./components/Alert";
 import { toast, ToastContainer } from "react-toastify";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
 import About from "./components/About";
 import Footer from "./components/layout/Footer";
 import Home from "./components/Home";
@@ -13,7 +11,6 @@ import Contact from "./components/contact";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Services from "./components/Services";
-import Testimonial from "./components/Testimonial";
 import Userlist from "./components/Userlist";
 import Userdetail from "./components/Userdetail";
 
@@ -21,8 +18,8 @@ function App() {
   const [text, setText] = useState("dark mode");
   const [mode, setMode] = useState("light");
   const [alert, setAlert] = useState(null);
-  const [darkModeTxt , setDarkModeTxt] = useState("dark");
-  
+  const [darkModeTxt, setDarkModeTxt] = useState("dark");
+
 
   const toggleMode = () => {
     if (mode === "dark") {
@@ -77,16 +74,15 @@ function App() {
           <Route path="/contact-us" element={<Contact />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Signup />} />
-          <Route path ="/services" element ={<Services/>} />
-          <Route path ="/users" element ={<Userlist/>} />
-          <Route path =":userIdid/:userName" element ={<Userdetail/>} />
-
+          <Route path="/services" element={<Services />} />
+          <Route path="/users" element={<Userlist />} />
+          <Route path="/:userId/:userName/:course" element={<Userdetail />} />
         </Routes>
 
-        <Footer mode ={mode} darkModeTxt ={darkModeTxt} />
+        <Footer mode={mode} darkModeTxt={darkModeTxt} />
       </Router>
     </>
   );
-} 
+}
 
 export default App;
