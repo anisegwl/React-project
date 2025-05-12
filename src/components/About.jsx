@@ -1,8 +1,12 @@
-import React, { useContext } from 'react'
-import ProductContext from '../context/ProductContext'
+import React, { useContext, useEffect } from 'react';
+import ProductContext from '../context/ProductContext';
 
 const About = () => {
-  const { products } = useContext(ProductContext)
+  const { products, user, fetchUser } = useContext(ProductContext);
+
+  useEffect(() => {
+    fetchUser();
+  }, [fetchUser]);
 
   return (
     <div className="container my-4">
@@ -10,18 +14,28 @@ const About = () => {
       <h3 className="mt-5 mb-4 text-center">Our Products</h3>
 
       <div className="row">
+        <div className="our-prod">Our products from context</div>
+        <div className="our-prod">
+          Our product from API: {user.title}
+        </div>
+
         {products.map((prod) => (
-          <div key={prod._id} className="col-md-4 d-flex align-items-stretch mb-4">
+          <div
+            key={prod._id}
+            className="col-md-4 d-flex align-items-stretch mb-4"
+          >
             <div className="card w-100">
               <img
-                src={prod.image || 'https://via.placeholder.com/350x200'}
-                className="card-img-top"
+                src={prod.img || 'https://via.placeholder.com/350x200'}
                 alt={prod.title}
+                className="card-img-top"
                 style={{ objectFit: 'cover', height: '200px' }}
               />
               <div className="card-body d-flex flex-column">
                 <h5 className="card-title">{prod.title}</h5>
-                <p className="card-text flex-grow-1">{prod.description}</p>
+                <p className="card-text flex-grow-1">
+                  {prod.description}
+                </p>
                 <p className="card-text">
                   <strong>Price:</strong> Rs {prod.price}
                 </p>
@@ -34,7 +48,7 @@ const About = () => {
         ))}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default About
+export default About;
