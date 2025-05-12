@@ -3,6 +3,20 @@ import { Link } from "react-router-dom";
 import image from "../assets/welcomeImage.jpg";
 
 const Signup = () => {
+ const [credential, setCredential] = React.useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+  console.log("this is credential name", credential.name);
+
+console.log(credential.username);
+  const handleSubmit = () => {
+    console.log(" signup form submitted");
+  };
+  const handleChange = (e) => {
+    setCredential({ ...credential, [e.target.name]: e.target.value });
+  };
   return (
     <div className="signup-container container mt-5">
       <div className="row">
@@ -19,12 +33,15 @@ const Signup = () => {
             <h4 className="mb-4 mt-4">CREATE ACCOUNT</h4>
           </center>
 
-          <form className="form-login">
+          <form onSubmit = {handleSubmit} className="form-login">
             <div className="mb-3">
               <label htmlFor="name" className="form-label">Full Name</label>
               <input
                 type="text"
+                name = "name"
                 className="input-form form-control"
+                value={credential.name}
+                onChange={handleChange}
                 id="name"
                 placeholder="Enter your full name"
               />
@@ -34,7 +51,10 @@ const Signup = () => {
               <label htmlFor="email" className="form-label">Email</label>
               <input
                 type="email"
+                name='email'
                 className="input-form form-control"
+                value ={credential.email}
+                onChange={handleChange}
                 id="email"
                 placeholder="Enter your email"
               />
@@ -45,6 +65,9 @@ const Signup = () => {
               <input
                 type="password"
                 className="input-form form-control"
+                name='password'
+                value ={credential.password}
+                onChange={handleChange}
                 id="password"
                 placeholder="Create a password"
               />
