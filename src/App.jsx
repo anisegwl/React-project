@@ -13,6 +13,8 @@ import Signup from "./components/Signup";
 import Services from "./components/Services";
 import Userlist from "./components/Userlist";
 import Userdetail from "./components/Userdetail";
+import About from "./components/About";
+import ProductState from "./context/ProductState";
 
 function App() {
   const [text, setText] = useState("dark mode");
@@ -46,41 +48,43 @@ function App() {
 
   return (
     <>
-      <Router>
-        <ToastContainer
-          position="top-center"
-          autoClose={2000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick={false}
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="light"
-        />
-        <Navbar
-          mode={mode}
-          text={text}
-          brandName={brandName}
-          toggleMode={toggleMode}
-          alert={alert}
-        />
+      <ProductState>
+        <Router>
+          <ToastContainer
+            position="top-center"
+            autoClose={2000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick={false}
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+          />
+          <Navbar
+            mode={mode}
+            text={text}
+            brandName={brandName}
+            toggleMode={toggleMode}
+            alert={alert}
+          />
 
 
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about-us" element={<About />} />
-          <Route path="/contact-us" element={<Contact />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Signup />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/users" element={<Userlist />} />
-          <Route path="/:userId/:userName/:course" element={<Userdetail />} />
-        </Routes>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about-us" element={<About />} />
+            <Route path="/contact-us" element={<Contact />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Signup />} />
+            <Route path="/services" element={<Services />} />
+            <Route path="/users" element={<Userlist />} />
+            <Route path="/:userId/:userName/:course" element={<Userdetail />} />
+          </Routes>
 
-        <Footer mode={mode} darkModeTxt={darkModeTxt} />
-      </Router>
+          <Footer mode={mode} darkModeTxt={darkModeTxt} />
+        </Router>
+      </ProductState>
     </>
   );
 }
