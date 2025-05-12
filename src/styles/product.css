@@ -1,0 +1,80 @@
+/* About.css */
+
+.our-card {
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: #fff;
+}
+
+.our-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.our-card .card-img-top {
+  height: 300px;
+  object-fit: cover;
+}
+
+.our-card .card-body {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+}
+
+.our-card .card-title {
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 0.75rem;
+}
+
+.our-card .card-text {
+  color: #4a5568;
+  margin-bottom: 1rem;
+}
+
+.our-price {
+  font-size: 25px;
+  color: #756969;
+  font-weight: 600;
+}
+
+.our-stock {
+  font-size: 20px;
+  color: #2f855a;
+}
+
+.buttons {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: auto;
+}
+
+.btn-gradient {
+  flex: 1;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  color: #fff;
+  border-radius: 0.5rem;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+.btn-gradient:hover {
+  background: linear-gradient(135deg, #5963d3 0%, #6b46c1 100%);
+  transform: translateY(-2px);
+}
+
+.btn-outline-green {
+  flex: 1;
+  background: #fff;
+  border: 2px solid #38a169;
+  color: #38a169;
+  border-radius: 0.5rem;
+  transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+.btn-outline-green:hover {
+  background: #38a169;
+  color: #fff;
+  transform: translateY(-2px);
+}

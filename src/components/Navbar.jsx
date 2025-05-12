@@ -1,11 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import '../styles/Navbar.css';
+import { FaShoppingCart } from "react-icons/fa";
+import '../styles/index.css'
+
 
 const Navbar = (props) => {
+  
   return (
     <nav className={`navbar navbar-expand-lg navbar-${props.mode} bg-${props.mode}`}>
-      <div className="container-fluid">
+      <div className="container-fluid " >
         <Link className="navbar-brand" to="/">
           {props.brandName}
         </Link>
@@ -30,7 +34,7 @@ const Navbar = (props) => {
             </li>
             <li className="nav-item">
               <Link className="nav-link" to="/about-us">
-                About Us
+                Products
               </Link>
             </li>
             <li className="nav-item">
@@ -60,7 +64,7 @@ const Navbar = (props) => {
             </li>
 
             {/* Dropdown menu */}
-            <li className="nav-item dropdown">
+            {/* <li className="nav-item dropdown">
               <a
                 className="nav-link dropdown-toggle"
                 href="#"
@@ -91,7 +95,7 @@ const Navbar = (props) => {
                   </a>
                 </li>
               </ul>
-            </li>
+            </li> */}
 
             {/* Login button */}
             <li className="nav-item">
@@ -117,7 +121,15 @@ const Navbar = (props) => {
               </button>
             </li>
           </ul>
-
+          <button
+            type="button"
+            className={`cart-btn btn position-relative text-${props.darkModeTxt}`}
+          >
+            <FaShoppingCart />
+            <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+              2
+            </span>
+          </button>
           {/* Mode toggle button */}
           <div className="toggle-button">
             <button

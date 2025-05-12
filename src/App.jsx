@@ -18,9 +18,9 @@ import ProductState from "./context/ProductState";
 
 function App() {
   const [text, setText] = useState("dark mode");
-  const [mode, setMode] = useState("light");
+  const [mode, setMode] = useState("dark");
   const [alert, setAlert] = useState(null);
-  const [darkModeTxt, setDarkModeTxt] = useState("dark");
+  const [darkModeTxt, setDarkModeTxt] = useState("light");
 
 
   const toggleMode = () => {
@@ -44,7 +44,7 @@ function App() {
     setTimeout(() => setAlert(null), 2000);
   };
 
-  const brandName = "UOIT-MASR";
+  const brandName = "UOIT-Appareals";
 
   return (
     <>
@@ -68,6 +68,7 @@ function App() {
             brandName={brandName}
             toggleMode={toggleMode}
             alert={alert}
+            darkModeTxt = {darkModeTxt}
           />
 
 

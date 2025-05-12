@@ -1,4 +1,6 @@
-.custom-carousel {
+
+
+/* .custom-carousel {
     width: 100vw;
     height: 500px;
     overflow: hidden;
@@ -11,4 +13,30 @@
     height: 100%;
     object-fit: cover;
   }
-  
+   */
+
+   /* SplideCarousel.css */
+
+.my-splide {
+  padding: 1rem 0;
+}
+
+.slide-card {
+  border-radius: 0.75rem;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.slide-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.slide-card img {
+  width: 100%;
+  /* height: 200px; */
+  object-fit: cover;
+}
+

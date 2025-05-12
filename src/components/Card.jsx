@@ -51,3 +51,7 @@ const Card = (props) => {
 };
 
 export default Card;
+ {/* <div className="our-prod">Our products from context</div>
+        <div className="our-prod">
+          Our product from API: {user.title}
+        </div> */}
