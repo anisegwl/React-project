@@ -77,7 +77,7 @@ function App() {
             <Route path="/about-us" element={<About />} />
             <Route path="/contact-us" element={<Contact />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Signup />} />
+            <Route path="/signup" element={<Signup />} />
             <Route path="/services" element={<Services />} />
             <Route path="/users" element={<Userlist />} />
             <Route path="/:userId/:userName/:course" element={<Userdetail />} />

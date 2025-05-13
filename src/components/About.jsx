@@ -39,7 +39,6 @@ const About = () => {
                   </button>
                   <button
                     className="btn-outline-green"
-                    disabled={prod.instock === 0}
                   >
                     Add to Cart
                   </button>

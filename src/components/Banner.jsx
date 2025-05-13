@@ -30,8 +30,8 @@ const SplideCarousel = () => (
     aria-label="Demo Splide Carousel"
     className="my-splide"
   >
-    {/* Repeat these slides with your own images/content */}
-    <SplideSlide className= 'mt-5'>
+    
+    <SplideSlide className= 'mt-5 mb-5'>
       <div className="slide-card ">
         <img src={image1} alt="Slide 1" />
       </div>

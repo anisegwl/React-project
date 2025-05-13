@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import image from '../assets/welcomeImage.jpg';
+import { FaUser, FaEnvelope, FaLock, FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const Signup = () => {
   const [credential, setCredential] = useState({
@@ -8,6 +8,7 @@ const Signup = () => {
     email: '',
     password: '',
   });
+   const [showPwd, setShowPwd] = useState(false);
 
   console.log('this is credential name', credential);
 
@@ -39,79 +40,71 @@ const Signup = () => {
   };
 
   return (
-    <div className="signup-container container mt-5">
-      <div className="row">
-        <div className="col-md-6 mb-4">
-          <img
-            src={image}
-            alt="Register"
-            className="signup-img img-fluid rounded"
-          />
-        </div>
+     <div className="auth-page">
+      <div className="auth-header">
+        <h1>Create an account</h1>
+        <p>Fill in the form to get started</p>
+      </div>
 
-        <div className="col-md-6">
-          <center>
-            <h4 className="mb-4 mt-4">CREATE ACCOUNT</h4>
-          </center>
+      <div className="auth-card">
+        <form className="auth-form" onSubmit={handleSubmit}>
+          <div className="form-group">
+            <FaUser className="icon" />
+            <input
+              type="text"
+              name="fullName"
+              placeholder="Full name"
+              value={credential.name}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-          <form onSubmit={handleSubmit} className="form-login">
-            <div className="mb-3">
-              <label htmlFor="name" className="form-label">
-                Full Name
-              </label>
-              <input
-                type="text"
-                name="name"
-                id="name"
-                className="input-form form-control"
-                value={credential.name}
-                onChange={handleChange}
-                placeholder="Enter your full name"
-              />
-            </div>
+          <div className="form-group">
+            <FaEnvelope className="icon" />
+            <input
+              type="email"
+              name="email"
+              placeholder="Email address"
+              value={credential.email}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-            <div className="mb-3">
-              <label htmlFor="email" className="form-label">
-                Email
-              </label>
-              <input
-                type="email"
-                name="email"
-                id="email"
-                className="input-form form-control"
-                value={credential.email}
-                onChange={handleChange}
-                placeholder="Enter your email"
-              />
-            </div>
+          <div className="form-group">
+            <FaLock className="icon" />
+            <input
+              type={showPwd ? 'text' : 'password'}
+              name="password"
+              placeholder="Password"
+              value={credential.password}
+              onChange={handleChange}
+              required
+            />
+            <span
+              className="password-toggle"
+              onClick={() => setShowPwd(p => !p)}
+            >
+              {showPwd ? <FaEyeSlash /> : <FaEye />}
+            </span>
+          </div>
 
-            <div className="mb-3">
-              <label htmlFor="password" className="form-label">
-                Password
-              </label>
-              <input
-                type="password"
-                name="password"
-                id="password"
-                className="input-form form-control"
-                value={credential.password}
-                onChange={handleChange}
-                placeholder="Create a password"
-              />
-            </div>
+          <button type="submit" className="auth-button">
+            Sign Up
+          </button>
 
-            <button className="form-btn" type="submit">
-              REGISTER
-            </button>
+          <p className="auth-terms">
+            By signing up, you agree to our{' '}
+            <Link to="#">Terms of Service</Link> and{' '}
+            <Link to="#">Privacy Policy</Link>.
+          </p>
+        </form>
+      </div>
 
-            <p className="mt-3">
-              Already have an account?{' '}
-              <Link to="/login" className="link">
-                Login Here!
-              </Link>
-            </p>
-          </form>
-        </div>
+      <div className="auth-footer-text">
+        Already have an account?{' '}
+        <Link to="/login">Log in</Link>
       </div>
     </div>
   );

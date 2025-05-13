@@ -113,7 +113,7 @@ const Navbar = (props) => {
             <li className="nav-item">
               <button className="btn btn-success ms-2">
                 <Link
-                  to="/register"
+                  to="/signup"
                   className={`text-decoration-none ${props.mode === 'light' ? 'text-dark' : 'text-light'}`}
                 >
                   SignUp

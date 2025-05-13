@@ -3,7 +3,7 @@ import '../../styles/footer.css';
 
 const Footer = (props) => {
   return (
-    <div className="footer-wrapper mt-5">
+    <div className="footer-wrapper ">
       <footer className={`footer py-5 bg-${props.mode} text-${props.darkModeTxt}`}>
         <div className="container">
           <div className="row">
@@ -42,9 +42,9 @@ const Footer = (props) => {
             <div className="col-md-4">
               <h5 className="footer-heading mb-4">About Us</h5>
               <p className="footer-text">
-                We take pleasure in providing individual solutions with the highest levels of care, professionalism, and absolute commitment for further Education. This is the place where it feels like home
+                We take pleasure in providing individual with unique style of fitting and finishing. Our team of skilled craftsmen are dedicated to delivering the highest quality products that meet the standard
               </p>
-              <p><strong>20 Years</strong><br />In Education</p>
+              <p><strong>5 Years</strong><br />In Clothing</p>
             </div>
 
           </div>
@@ -53,7 +53,7 @@ const Footer = (props) => {
 
       <div className="lower-footer">
         <p>
-          &copy; 2023 - UOIT-MASR Your Education Hub. All Rights Reserved.
+          &copy; 2023 - UOIT-Apparael Your Clothing Hub. All Rights Reserved.
           Designed by Anise Gnawali.
         </p>
       </div>
@@ -61,4 +61,4 @@ const Footer = (props) => {
   );
 };
 
-export default Footer;
+export default Footer; 

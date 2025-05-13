@@ -30,13 +30,13 @@ const Card = (props) => {
           <div className="title-content"> Our Services</div>
           {cardItems.map((item) => {
             return (
-              <div className="col-md-4">
-                <div class="card">
-                  <img src={img} class="card-img-top" alt="..." />
-                  <div class="card-body">
-                    <h5 class="card-title">{item.title}</h5>
-                    <p class="card-text">{item.description}</p>
-                    <a href={item.href} target="_blank" class="btn btn-primary">
+              <div  key ={item.title} className="col-md-4">
+                <div className="card">
+                  <img src={img} className="card-img-top" alt="..." />
+                  <div className="card-body">
+                    <h5 className="card-title">{item.title}</h5>
+                    <p className="card-text">{item.description}</p>
+                    <a href={item.href} target="_blank" className="btn btn-primary">
                       Go youtube
                     </a>
                   </div>
