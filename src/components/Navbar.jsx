@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import '../styles/Navbar.css';
 import { FaShoppingCart } from "react-icons/fa";
 import '../styles/index.css'
+import ProductContext from "../context/ProductContext";
 
 
 const Navbar = (props) => {
+  const context =useContext(ProductContext);
+  const {state : {cart}} = context;
   
   return (
     <nav className={`navbar navbar-expand-lg navbar-${props.mode} bg-${props.mode}`}>
@@ -127,7 +130,7 @@ const Navbar = (props) => {
           >
             <FaShoppingCart />
             <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-              2
+              {cart && cart.length}
             </span>
           </button>
           {/* Mode toggle button */}
