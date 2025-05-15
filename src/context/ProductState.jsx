@@ -42,16 +42,11 @@ const ProductState = (props) => {
     products: initialProducts,
     cart: [],
   });
-
+console.log("api key is" , import.meta.env.VITE_API_KEY )
  const fetchData = async () => {
   try {
-    const response = await fetch(
-      `https://newsapi.org/v2/everything` +
-      `?q=tesla` +
-      `&from=2025-04-15` +
-      `&sortBy=publishedAt` +
-      `&apiKey=${import.meta.env.VITE_API_KEY}`
-    );
+    const url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${import.meta.env.VITE_API_KEY}`;
+    const response = await fetch(url);
     const data = await response.json();
     setArticles(data.articles);
     console.log("the data is", data.articles);
@@ -61,7 +56,7 @@ const ProductState = (props) => {
 };
 
   return (
-    <ProductContext.Provider value={{ state, dispatch, fetchData}}>
+    <ProductContext.Provider value={{ state,articles, dispatch, fetchData}}>
       {props.children}
     </ProductContext.Provider>
   );

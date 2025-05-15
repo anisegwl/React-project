@@ -1,14 +1,18 @@
 import React, { useContext, useEffect } from "react";
 import ProductContext from "../context/ProductContext";
 import "../styles/product.css";
+import News from "./News";
+
 
 const About = () => {
   const {
     state: { products, cart },
     dispatch,
     articles,
-    fetchData
+    fetchData,
   } = useContext(ProductContext);
+
+  console.log(articles)
 
   useEffect(() => {
     fetchData();
@@ -51,7 +55,7 @@ const About = () => {
                       </button>
                     ) : (
                       <button
-                        className="btn-gradient btn-primary mx-2" style={{height:"30px", }}
+                        className="btn-gradient btn-primary mx-2" style={{height:"30px" }}
                         onClick={() =>
                           dispatch({ type: "ADD_TO_CART", payload: prod })
                         }
@@ -65,7 +69,7 @@ const About = () => {
             </div>
           );
         })}
-        
+        <News articles={articles}/>
       </div>
     </div>
   );
