@@ -6,12 +6,13 @@ const About = () => {
   const {
     state: { products, cart },
     dispatch,
-    fetchUser
+    articles,
+    fetchData
   } = useContext(ProductContext);
 
   useEffect(() => {
-    fetchUser();
-  }, [fetchUser]);
+    fetchData();
+  }, []);
 
   return (
     <div className="container my-4">
@@ -33,9 +34,15 @@ const About = () => {
                       <s>Rs {prod.price}</s>
                     </p>
                     <p className="our-price">Rs {prod.discountPrice}</p>
+                    
+                  </div>
+                  <p className="our-stock">
+                    {prod.instock > 0 ? `${prod.instock} in stock` : "Out of stock"}
+                  </p>
+                  <div className="buttons">
                     {inCart ? (
                       <button
-                        className="btn btn-danger mx-2"
+                        className="btn-removeCart mx-2"
                         onClick={() =>
                           dispatch({ type: "REMOVE_FROM_CART", payload: prod })
                         }
@@ -44,7 +51,7 @@ const About = () => {
                       </button>
                     ) : (
                       <button
-                        className="btn btn-primary mx-2"
+                        className="btn-gradient btn-primary mx-2" style={{height:"30px", }}
                         onClick={() =>
                           dispatch({ type: "ADD_TO_CART", payload: prod })
                         }
@@ -53,25 +60,12 @@ const About = () => {
                       </button>
                     )}
                   </div>
-                  <p className="our-stock">
-                    {prod.instock > 0 ? `${prod.instock} in stock` : "Out of stock"}
-                  </p>
-                  <div className="buttons">
-                    <button
-                      className="btn-gradient"
-                      onClick={() =>
-                        dispatch({ type: "ADD_TO_CART", payload: prod })
-                      }
-                    >
-                      Buy Now
-                    </button>
-                    {/* removed the duplicate Add to Cart here */}
-                  </div>
                 </div>
               </div>
             </div>
           );
         })}
+        
       </div>
     </div>
   );

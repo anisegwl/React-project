@@ -35,7 +35,7 @@
 }
 
 .our-price {
-  font-size: 25px;
+  font-size: 20px;
   color: #756969;
   font-weight: 600;
 }
@@ -59,6 +59,16 @@
   border-radius: 0.5rem;
   transition: background 0.3s ease, transform 0.3s ease;
 }
+
+.btn-removeCart{
+  flex: 1;
+  background: linear-gradient(135deg, #ea8b66 0%, #b35c5c 100%);
+  border: none;
+  color: #fff;
+  border-radius: 0.5rem;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
 .btn-gradient:hover {
   background: linear-gradient(135deg, #5963d3 0%, #6b46c1 100%);
   transform: translateY(-2px);
