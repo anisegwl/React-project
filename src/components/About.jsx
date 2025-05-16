@@ -8,16 +8,8 @@ const About = () => {
   const {
     state: { products, cart },
     dispatch,
-    articles,
-    fetchData,
   } = useContext(ProductContext);
-
-  console.log(articles)
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
+ 
   return (
     <div className="container my-4">
       <h3 className="mt-3 mb-4 text-center" style={{ fontSize: "40px", color: "grey" }}>
@@ -69,7 +61,7 @@ const About = () => {
             </div>
           );
         })}
-        <News articles={articles}/>
+        
       </div>
     </div>
   );

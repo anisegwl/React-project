@@ -10,11 +10,12 @@ import Home from "./components/Home";
 import Contact from "./components/contact";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
-import Services from "./components/Services";
+
 import Userlist from "./components/Userlist";
 import Userdetail from "./components/Userdetail";
 import About from "./components/About";
 import ProductState from "./context/ProductState";
+import News from "./components/News";
 
 function App() {
   const [text, setText] = useState("dark mode");
@@ -78,7 +79,7 @@ function App() {
             <Route path="/contact-us" element={<Contact />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
-            <Route path="/services" element={<Services />} />
+            <Route path="/news" element={<News />} />
             <Route path="/users" element={<Userlist />} />
             <Route path="/:userId/:userName/:course" element={<Userdetail />} />
           </Routes>
