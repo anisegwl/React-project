@@ -16,6 +16,7 @@ import Userdetail from "./components/Userdetail";
 import About from "./components/About";
 import ProductState from "./context/ProductState";
 import News from "./components/News";
+import CartItems from "./components/CartItems";
 
 function App() {
   const [text, setText] = useState("dark mode");
@@ -82,6 +83,7 @@ function App() {
             <Route path="/news" element={<News />} />
             <Route path="/users" element={<Userlist />} />
             <Route path="/:userId/:userName/:course" element={<Userdetail />} />
+            <Route path = "/cartitems" element={< CartItems/>} /> 
           </Routes>
 
           <Footer mode={mode} darkModeTxt={darkModeTxt} />

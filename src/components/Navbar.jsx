@@ -124,6 +124,7 @@ const Navbar = (props) => {
               </button>
             </li>
           </ul>
+          <Link to = "/cartitems">
           <button
             type="button"
             className={`cart-btn btn position-relative text-${props.darkModeTxt}`}
@@ -133,6 +134,7 @@ const Navbar = (props) => {
               {cart && cart.length}
             </span>
           </button>
+          </Link>
           {/* Mode toggle button */}
           <div className="toggle-button">
             <button
