@@ -42,7 +42,6 @@ const ProductState = (props) => {
     products: initialProducts,
     cart: [],
   });
-console.log("api key is" , import.meta.env.VITE_API_KEY )
  const fetchData = async () => {
   try {
     const url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${import.meta.env.VITE_API_KEY}`;

@@ -1,0 +1,85 @@
+body{
+    background-color: #e7e6e2
+}
+.container {
+  padding: 20px;
+}
+
+.container h4 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+
+.product-container {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 40px 0px 40px 100px;
+}
+.last-container {
+     background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+/* Remove default list styles */
+.product-container ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Individual cart item styling */
+.product-container ul li {
+  padding: 15px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+/* Remove border on last item */
+.product-container ul li:last-child {
+  border-bottom: none;
+}
+
+/* Product image styling */
+.product-container img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 4px;
+  display: flex;
+  justify-self: center;
+  
+}
+
+/* Text styling for product details */
+.col-md-2 h5 {
+  font-size: 1rem;
+  margin-bottom: 5px;
+}
+
+.col-md-2 p {
+  margin-bottom: 5px;
+  color: #555;
+}
+
+/* Quantity select box */
+select.form-control {
+  width: 70px;
+  display: inline-block;
+  margin: 0 auto;
+}
+
+
+
+/* Product total and grand total styling */
+.product-total p {
+  margin-top: 30px;
+  font-weight: bold;
+  text-align: center;
+}
+
+
+
