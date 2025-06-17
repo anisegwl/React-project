@@ -1,0 +1,142 @@
+
+.auth-page {
+  min-height: 100vh;
+  background: #F7F8FA;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* header */
+.auth-header {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+.auth-header h1 {
+  font-size: 2rem;
+  color: #19202D;
+  margin-bottom: 0.5rem;
+}
+.auth-header p {
+  color: #6E7789;
+}
+
+/* card */
+.auth-card {
+  width: 100%;
+  max-width: 400px;
+  background: #FFF;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(25, 32, 45, 0.08);
+  overflow: hidden;
+}
+
+/* form */
+.auth-form {
+  padding: 1.5rem;
+}
+.form-group {
+  position: relative;
+  margin-bottom: 1rem;
+}
+.form-group input {
+  width: 100%;
+  padding: 0.75rem 1rem 0.75rem 2.5rem;
+  border: 1px solid #E4E7EB;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  color: #19202D;
+}
+.form-group input:focus {
+  outline: none;
+  border-color: #8A2AF1;
+}
+.form-group .icon {
+  position: absolute;
+  top: 50%;
+  left: 1rem;
+  transform: translateY(-50%);
+  color: #9EA3AE;
+}
+.password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  transform: translateY(-50%);
+  color: #9EA3AE;
+  cursor: pointer;
+}
+
+.checkbox-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.checkbox-group label {
+  display: flex;
+  align-items: center;
+  font-size: 0.875rem;
+  color: #4A5768;
+}
+.checkbox-group input {
+  margin-right: 0.5rem;
+}
+.forgot-link {
+  font-size: 0.875rem;
+  color: #000000;
+  text-decoration: none;
+}
+.forgot-link:hover {
+  text-decoration: underline;
+}
+
+/* button */
+.auth-button {
+  width: 100%;
+  padding: 0.75rem;
+  background: #080808;
+  color: #FFF;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 0.5rem;
+}
+.auth-button:hover {
+  background: #0b0b0b;
+}
+
+.auth-terms {
+  font-size: 0.875rem;
+  color: #6E7789;
+  margin-top: 1rem;
+  text-align: center;
+}
+.auth-terms a {
+  color: #141415;
+  text-decoration: none;
+}
+.auth-terms a:hover {
+  text-decoration: underline;
+}
+
+.auth-footer-text {
+  font-size: 0.875rem;
+  color: #6E7789;
+  margin: 1.5rem 0;
+  text-align: center;
+}
+.auth-footer-text a {
+  color: #000000;
+  text-decoration: none;
+}
+.auth-footer-text a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+  .auth-card { max-width: 100%; }
+}
