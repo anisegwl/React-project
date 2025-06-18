@@ -9,6 +9,7 @@ const AddProduct = () => {
     price: "",
     image: "",
     instock: "",
+    category:"",
     discount: "",
   });
 
@@ -20,6 +21,7 @@ const AddProduct = () => {
     formData.append("description", product.description);
     formData.append("price", product.price);
     formData.append("instock", product.instock);
+    formData.append("category", product.category);
     formData.append("discount", product.discount);
     if (product.image) {
       formData.append("myfile", product.image);
@@ -43,6 +45,7 @@ const AddProduct = () => {
         price: "",
         image: "",
         instock: "",
+        category:"",
         discount: "",
       });
     } catch (error) {
@@ -98,6 +101,17 @@ const AddProduct = () => {
                   type="number"
                   name="price"
                   value={product.price}
+                  onChange={handleChange}
+                  className="form-control"
+                  required
+                />
+              </div>
+              <div className="mb-3">
+                <label className="form-label">Category</label>
+                <input
+                  type="text"
+                  name="category"
+                  value={product.category}
                   onChange={handleChange}
                   className="form-control"
                   required

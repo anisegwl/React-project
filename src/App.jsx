@@ -75,6 +75,7 @@ function App() {
             <Route path="/testimonials" element={< Testimonial />} />
             <Route path="/add-product" element={<AddProduct />} />
              <Route path="/search/:searchQuery" element={<SearchResult />} />
+             <Route path ='/products/:searchQuery' element={<About/>}/>
             <Route path="/payment" element={<Payment/>} />
           </Routes>
           

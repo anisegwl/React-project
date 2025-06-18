@@ -8,33 +8,41 @@ import { cartReducer } from "./Reducer";
 
 const ProductState = (props) => {
   const initialProducts = [
-    { _id: 1,
-       img: image1,
-        title: "Unisex Bird & Tree",
-       description: "Khaki Casual Collar Short Sleeve Knitted Fabric Animal,Plants Embellished  Stretch Unisex Tops", price: 1799, 
-       discountPrice: 1600,
-        instock: 5 },
-    { _id: 2,
-       img: image2, 
-       title: "Building Graphic Tee", 
-       description: "This is good product from Khaki Casual Collar Short Sleeve Polyester Letter Stretch Clothing", price: 1500, 
-       discountPrice: 1200, 
-       instock: 5 },
+    {
+      _id: 1,
+      img: image1,
+      title: "Unisex Bird & Tree",
+      description: "Khaki Casual Collar Short Sleeve Knitted Fabric Animal,Plants Embellished  Stretch Unisex Tops", price: 1799,
+      discountPrice: 1600,
+      instock: 5
+    },
+    {
+      _id: 2,
+      img: image2,
+      title: "Building Graphic Tee",
+      description: "This is good product from Khaki Casual Collar Short Sleeve Polyester Letter Stretch Clothing", price: 1500,
+      discountPrice: 1200,
+      instock: 5
+    },
 
-    { _id: 3, 
-      img: image3, 
-      title: "Men-Geo Graphic Tee", 
-      description: "Black Casual Collar Short Fabric Geometric,Letter Embellished Slight Stretch Men Clothing", price: 1640, 
-      discountPrice: 1500, 
-      instock: 3 },
+    {
+      _id: 3,
+      img: image3,
+      title: "Men-Geo Graphic Tee",
+      description: "Black Casual Collar Short Fabric Geometric,Letter Embellished Slight Stretch Men Clothing", price: 1640,
+      discountPrice: 1500,
+      instock: 3
+    },
 
-    { _id: 4, 
-      img: image4, 
-      title: "Cat Graphic Tee", 
-      description: "Astro cat graphic Tee, soft fabric with embeded style , suitable for casual wear.", 
-      price: 950, 
-      discountPrice: 700, 
-      instock: 10 },
+    {
+      _id: 4,
+      img: image4,
+      title: "Cat Graphic Tee",
+      description: "Astro cat graphic Tee, soft fabric with embeded style , suitable for casual wear.",
+      price: 950,
+      discountPrice: 700,
+      instock: 10
+    },
   ];
   const [product, setProducts] = useState(initialProducts);
   const [articles, setArticles] = useState([])
@@ -42,38 +50,38 @@ const ProductState = (props) => {
     products: initialProducts,
     cart: [],
   });
- const fetchData = async () => {
-  try {
-    const url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${import.meta.env.VITE_API_KEY}`;
-    const response = await fetch(url);
-    const data = await response.json();
-    setArticles(data.articles);
-    console.log("the data is", data.articles);
-  } catch (error) {
-    console.error(error);
-  }
-};
-const allProduct = async (searchQuery="") => {
-  try {
-    const resp = await fetch(`http://localhost:5000/api/products/getallproduct?searchQuery=${searchQuery}`, {
-      method: "GET", //read
-      headers: {
-        "Content-Type": "application/json",
-        "auth-token":localStorage.getItem("token"),
-      },
-    });
-    const data = await resp.json();
-    setProducts(data);
-  
-    console.log("data from api ", data)
-  } catch (error) {
-    console.error("Internal server error", error);
-   
-  }
-};
+  const fetchData = async () => {
+    try {
+      const url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${import.meta.env.VITE_API_KEY}`;
+      const response = await fetch(url);
+      const data = await response.json();
+      setArticles(data.articles);
+      console.log("the data is", data.articles);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const allProduct = async (searchQuery = "") => {
+    try {
+      const resp = await fetch(`http://localhost:5000/api/products/getallproduct?searchQuery=${searchQuery}`, {
+        method: "GET", //read
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": localStorage.getItem("token"),
+        },
+      });
+      const data = await resp.json();
+      setProducts(data);
 
- const editProduct = async (id, updateData) => {
-    const { title, description, price, instock , discount } = updateData;
+      console.log("data from api ", data)
+    } catch (error) {
+      console.error("Internal server error", error);
+
+    }
+  };
+
+  const editProduct = async (id, updateData) => {
+    const { title, description, price, instock, discount } = updateData;
     try {
       const response = await fetch(
         `http://localhost:5000/api/products/updateproduct/${id}`,
@@ -97,13 +105,14 @@ const allProduct = async (searchQuery="") => {
   };
 
   //delete product
-   const deleteProduct = async (id) => {
+  const deleteProduct = async (id,e) => {
+    e.preventDefault();
     try {
-      const response = await fetch(`https://fakestoreapi.com/products/${id}`, {
+      const response = await fetch(`http://localhost:5000/api/products/deleteproduct/${id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
-          "auth-token": "mytoken",
+          "auth-token": localStorage.getItem("token"),
         },
       });
       if (!response.ok) {
@@ -118,7 +127,7 @@ const allProduct = async (searchQuery="") => {
   };
 
   return (
-    <ProductContext.Provider value={{ state,articles, dispatch, deleteProduct, fetchData, allProduct, editProduct,product }}>
+    <ProductContext.Provider value={{ state, articles, dispatch, deleteProduct, fetchData, allProduct, editProduct, product }}>
       {props.children}
     </ProductContext.Provider>
   );
