@@ -124,7 +124,7 @@
 
 /* Apply Promo Button */
 .cart-page .promo-section .btn-primary {
-  background-color: #000;
+  background-color: #084d4f;
   color: #fff;
   padding: 14px 26px;
   font-size: 15px;
@@ -189,7 +189,7 @@
 }
 
 .cart-page .proceed-btn {
-  background-color: #000;
+  background-color:#084d4f;
   color: #fff;
   padding: 12px;
   font-weight: 600;

@@ -22,6 +22,7 @@ import Payment from "./components/Payment";
 import UserState from "./context/Userstate";
 import SearchResult from "./components/SearchResult";
 import Testimonial from "./components/Testimonial";
+import Header from "./components/layout/Header";
 
 function App() {
   const [text, setText] = useState("dark mode");
@@ -52,6 +53,7 @@ function App() {
             pauseOnHover
             theme="light"
           />
+          <Header/>
           <Navbar
             mode={mode}
             text={text}

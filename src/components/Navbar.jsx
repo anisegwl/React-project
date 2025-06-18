@@ -27,8 +27,6 @@ const Navbar = (props) => {
   useEffect(() => {
     if (token && !user) {
       getUser();
-    } else if (!token && location.pathname !== "/login") {
-      navigate("/login");
     }
   }, [token, user]);
 

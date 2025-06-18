@@ -1,6 +1,7 @@
 
 .fitify-navbar {
-  background-color: #ffffff;
+  background-color: #084d4f;
+  
   height: 80px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   position: sticky;
@@ -58,7 +59,7 @@
 }
 
 .nav-link {
-  color: #333333;
+  color:#f1d1aa;
   text-decoration: none;
   font-weight: 600;
   font-size: 14px;
@@ -70,7 +71,7 @@
 }
 
 .nav-link:hover {
-  color: #2c5530;
+  color: #f1d1aa;
   text-decoration: none;
 }
 
@@ -141,7 +142,7 @@
 }
 
 .search-icon {
-  color: #666;
+  color: #bf8464;
   font-size: 14px;
 }
 
@@ -160,7 +161,7 @@
   cursor: pointer;
   border-radius: 20px;
   transition: background-color 0.3s ease;
-  color: #333;
+  color: #f1d1aa;
   font-size: 14px;
   font-weight: 500;
 }
@@ -171,7 +172,7 @@
 
 .user-icon {
   font-size: 16px;
-  color: #151615;
+  color: #f1d1aa;
 }
 
 .user-text {
@@ -232,7 +233,7 @@
   cursor: pointer;
   border-radius: 20px;
   transition: background-color 0.3s ease;
-  color: #333;
+  color:#f1d1aa;
   font-size: 14px;
   font-weight: 500;
   position: relative;
@@ -244,7 +245,7 @@
 
 .cart-icon {
   font-size: 16px;
-  color: #030303;
+  color:#f1d1aa;
 }
 
 .cart-text {

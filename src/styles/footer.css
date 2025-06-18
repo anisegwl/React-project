@@ -10,7 +10,12 @@
     padding-left: 0;
     margin-bottom: 0;
   }
-  
+  .footer-wrapper{
+    background-color: #084d4f;
+    color: #f1d1aa;
+    ;
+    font-family: 'Arial', sans-serif;
+  }
   .footer-wrapper .footer-ul li {
     margin-bottom: 12px;
     font-size: 14px;
@@ -35,7 +40,7 @@
   
   .footer-wrapper .social-icons i {
     font-size: 20px;
-    color: white;
+    color:#f1d1aa;
     cursor: pointer;
     transition: color 0.3s ease;
   }

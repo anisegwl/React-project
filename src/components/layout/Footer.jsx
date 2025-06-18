@@ -4,7 +4,7 @@ import '../../styles/footer.css';
 const Footer = (props) => {
   return (
     <div className="footer-wrapper ">
-      <footer className={`footer py-5 bg-${props.mode} text-${props.darkModeTxt}`}>
+      <footer className={`footer py-5 `}>
         <div className="container">
           <div className="row">
 
