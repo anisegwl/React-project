@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaUser, FaEnvelope, FaLock, FaEye, FaEyeSlash } from 'react-icons/fa';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -15,6 +17,18 @@ const Signup = () => {
     e.preventDefault();
     const { name, email, password } = credential;
 
+    // 🔒 Field validation
+    if (!name || !email || !password) {
+      toast.error("⚠️ All fields are required!");
+      return;
+    }
+
+    // 🔒 Optional: check for weak password
+    if (password.length < 6) {
+      toast.error("🔑 Password should be at least 6 characters.");
+      return;
+    }
+
     try {
       const response = await fetch('http://localhost:5000/api/auth/createuser', {
         method: 'POST',
@@ -27,14 +41,17 @@ const Signup = () => {
       const data = await response.json();
       console.log('Response:', data);
 
-      if (data) {
-        localStorage.setItem("token", data.token);
-        navigate('/login');
+      if (!response.ok || !data.token) {
+        toast.error(data.error || "❌ Signup failed. Try again.");
+        return;
       }
 
-      console.log('Form submitted');
+      localStorage.setItem("token", data.token);
+      toast.success("✅ Account created successfully!");
+      navigate('/login');
     } catch (error) {
       console.error('Error submitting form:', error);
+      toast.error("🚨 Server error. Please try again later.");
     }
   };
 
@@ -86,7 +103,7 @@ const Signup = () => {
               type={showPwd ? 'text' : 'password'}
               name="password"
               placeholder="Password"
-              autoComplete="new-password" // ✅ for signup
+              autoComplete="new-password"
               value={credential.password}
               onChange={handleChange}
               required

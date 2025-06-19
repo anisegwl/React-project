@@ -68,7 +68,7 @@ const Navbar = (props) => {
               <Link className="nav-link" to="/men-products">MEN</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/gear">GEAR</Link>
+              <Link className="nav-link" to="/accsessories">GEAR</Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link" to="/supplements">Supplements</Link>

@@ -123,6 +123,8 @@ const AddProduct = () => {
                   <option value="">-- Select Category --</option>
                   <option value="Men">Men</option>
                   <option value="Women">Women</option>
+                  <option value="Supplements">Supplements</option>
+                  <option value="Accessories">Accessories</option>
                 </select>
               </div>
 

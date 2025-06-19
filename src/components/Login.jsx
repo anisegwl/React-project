@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import '../styles/login.css';
 import { FaEnvelope, FaLock, FaEye, FaEyeSlash } from 'react-icons/fa';
-
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const Login = () => {
   const navigate = useNavigate();
   const [credential, setCredential] = useState({
@@ -13,26 +14,38 @@ const Login = () => {
 
   console.log('Current credentials:', credential);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const { email, password } = credential;
+ const handleSubmit = async (e) => {
+  e.preventDefault();
+  const { email, password } = credential;
 
-    try {
-      const resp = await fetch('http://localhost:5000/api/auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
-      });
-      const data = await resp.json();
-      if(data){
-        localStorage.setItem("token", data.authToken);
-        navigate("/");
-      }
-      console.log('Login response:', data);
-    } catch (err) {
-      console.error('Login error:', err);
+  if (!email || !password) {
+    toast.error("⚠️ Please enter both email and password.");
+    return;
+  }
+
+  try {
+    const resp = await fetch('http://localhost:5000/api/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password }),
+    });
+
+    const data = await resp.json();
+
+    if (!resp.ok || !data.authToken) {
+      toast.error(data.error || "Invalid credentials. Please try again.");
+      return;
     }
-  };
+
+    localStorage.setItem("token", data.authToken);
+    toast.success("✅ Login successful!");
+    navigate("/");
+  } catch (err) {
+    console.error('Login error:', err);
+    toast.error(" Server error. Please try again later.");
+  }
+};
+
 
   const handleChange = (e) =>
     setCredential({

@@ -1,16 +1,14 @@
 import { useState } from "react";
 import './styles/App.css';
-import "./styles/login.css"
+import "./styles/login.css";
 import Navbar from "./components/Navbar";
 import { toast, ToastContainer } from "react-toastify";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-// import About from "./components/About";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import Footer from "./components/layout/Footer";
 import Home from "./components/Home";
 import Contact from "./components/contact";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
-
 import Userlist from "./components/Userlist";
 import Userdetail from "./components/Userdetail";
 import About from "./components/About";
@@ -26,8 +24,15 @@ import Header from "./components/layout/Header";
 import WomenProducts from "./components/WomenProducts";
 import MenProducts from "./components/MenProducts";
 import Profile from "./components/Profile";
+import Supplements from "./components/Supplements";
+import Accsessories from "./components/Accsessories";
+import { useEffect } from "react";
 
-function App() {
+// Wrapper component to access location inside App
+const AppWrapper = () => {
+  const location = useLocation();
+  const hideLayout = ["/login", "/signup"].includes(location.pathname);
+
   const [text, setText] = useState("dark mode");
   const [mode, setMode] = useState("dark");
   const [alert, setAlert] = useState(null);
@@ -41,7 +46,43 @@ function App() {
 
   return (
     <>
-    
+      {!hideLayout && <Header />}
+      {!hideLayout && (
+        <Navbar
+          mode={mode}
+          text={text}
+          brandName={brandName}
+          alert={alert}
+        />
+      )}
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about-us" element={<About />} />
+        <Route path="/contact-us" element={<Contact />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/news" element={<News />} />
+        <Route path="/women-products" element={<WomenProducts />} />
+        <Route path="/:userId/:userName/:course" element={<Userdetail />} />
+        <Route path="/cartitems" element={<CartItems />} />
+        <Route path="/men-products" element={<MenProducts />} />
+        <Route path="/add-product" element={<AddProduct />} />
+        <Route path="/search/:searchQuery" element={<SearchResult />} />
+        <Route path="/products/:searchQuery" element={<About />} />
+        <Route path="/payment" element={<Payment />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/supplements" element={<Supplements />} />
+        <Route path="/accsessories" element={<Accsessories />} />
+      </Routes>
+
+      {!hideLayout && <Footer />}
+    </>
+  );
+};
+
+function App() {
+  return (
     <UserState>
       <ProductState>
         <Router>
@@ -57,39 +98,10 @@ function App() {
             pauseOnHover
             theme="light"
           />
-          <Header/>
-          <Navbar
-            mode={mode}
-            text={text}
-            brandName={brandName}
-            alert={alert}
-            
-          />
-
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about-us" element={<About />} />
-            <Route path="/contact-us" element={<Contact />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/news" element={<News />} />
-            <Route path="/women-products" element={<WomenProducts />} />
-            <Route path="/:userId/:userName/:course" element={<Userdetail />} />
-            <Route path="/cartitems" element={< CartItems />} />
-            <Route path="/men-products" element={< MenProducts />} />
-            <Route path="/add-product" element={<AddProduct />} />
-             <Route path="/search/:searchQuery" element={<SearchResult />} />
-             <Route path ='/products/:searchQuery' element={<About/>}/>
-            <Route path="/payment" element={<Payment/>} />
-            <Route path="/profile" element={<Profile/>} />
-          </Routes>
-          
-          <Footer/>
+          <AppWrapper />
         </Router>
       </ProductState>
-      </UserState>
-      
-    </>
+    </UserState>
   );
 }
 
