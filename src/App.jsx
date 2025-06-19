@@ -26,7 +26,7 @@ import Header from "./components/layout/Header";
 import WomenProducts from "./components/WomenProducts";
 import MenProducts from "./components/MenProducts";
 import Profile from "./components/Profile";
-import CartState from "./context/CartState";
+
 function App() {
   const [text, setText] = useState("dark mode");
   const [mode, setMode] = useState("dark");
@@ -41,7 +41,7 @@ function App() {
 
   return (
     <>
-    <CartState>
+    
     <UserState>
       <ProductState>
         <Router>
@@ -88,7 +88,7 @@ function App() {
         </Router>
       </ProductState>
       </UserState>
-      </CartState>
+      
     </>
   );
 }

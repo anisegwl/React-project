@@ -13,6 +13,11 @@ export const cartReducer = (state, action) => {
         products: updatedProducts,
       };
     }
+    case "SET_PRODUCTS":
+  return {
+    ...state,
+    products: action.payload,
+  };
 
     case "REMOVE_FROM_CART": {
       const productId = action.payload._id;

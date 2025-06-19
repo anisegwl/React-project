@@ -1,4 +1,3 @@
-
 import React, { useContext, useEffect, useState } from "react";
 import productContext from "../context/ProductContext";
 import "../styles/product.css";
@@ -36,12 +35,21 @@ const WomenProducts = () => {
     setSelectedProduct(null);
   };
 
-  const saveEdit = (updateData) => {
-    editProduct(selectedProduct._id, updateData);
+  const saveEdit = async (updateData) => {
+    try {
+      await editProduct(selectedProduct._id, updateData);
+      closeEditModal();
+    } catch (error) {
+      console.error("Failed to edit product:", error);
+    }
   };
 
-  const handleDelete = (id) => {
-    deleteProduct(id);
+  const handleDelete = async (id) => {
+    try {
+      await deleteProduct(id);
+    } catch (error) {
+      console.error("Failed to delete product:", error);
+    }
   };
 
   useEffect(() => {
@@ -75,6 +83,15 @@ const WomenProducts = () => {
           />
         ))}
       </div>
+      
+      {modalVisible && (
+        <EditProductModal
+          visible={modalVisible}
+          product={selectedProduct}
+          onClose={closeEditModal}
+          onSave={saveEdit}
+        />
+      )}
     </div>
   );
 };

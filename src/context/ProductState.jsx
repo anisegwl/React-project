@@ -12,7 +12,8 @@ const ProductState = (props) => {
       _id: 1,
       img: image1,
       title: "Unisex Bird & Tree",
-      description: "Khaki Casual Collar Short Sleeve Knitted Fabric Animal,Plants Embellished  Stretch Unisex Tops", price: 1799,
+      description: "Khaki Casual Collar Short Sleeve Knitted Fabric Animal,Plants Embellished  Stretch Unisex Tops", 
+      price: 1799,
       discountPrice: 1600,
       instock: 5
     },
@@ -20,20 +21,20 @@ const ProductState = (props) => {
       _id: 2,
       img: image2,
       title: "Building Graphic Tee",
-      description: "This is good product from Khaki Casual Collar Short Sleeve Polyester Letter Stretch Clothing", price: 1500,
+      description: "This is good product from Khaki Casual Collar Short Sleeve Polyester Letter Stretch Clothing", 
+      price: 1500,
       discountPrice: 1200,
       instock: 5
     },
-
     {
       _id: 3,
       img: image3,
       title: "Men-Geo Graphic Tee",
-      description: "Black Casual Collar Short Fabric Geometric,Letter Embellished Slight Stretch Men Clothing", price: 1640,
+      description: "Black Casual Collar Short Fabric Geometric,Letter Embellished Slight Stretch Men Clothing", 
+      price: 1640,
       discountPrice: 1500,
       instock: 3
     },
-
     {
       _id: 4,
       img: image4,
@@ -44,12 +45,14 @@ const ProductState = (props) => {
       instock: 10
     },
   ];
+
   const [product, setProducts] = useState(initialProducts);
-  const [articles, setArticles] = useState([])
+  const [articles, setArticles] = useState([]);
   const [state, dispatch] = useReducer(cartReducer, {
     products: initialProducts,
     cart: [],
   });
+
   const fetchData = async () => {
     try {
       const url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${import.meta.env.VITE_API_KEY}`;
@@ -61,24 +64,32 @@ const ProductState = (props) => {
       console.error(error);
     }
   };
- const allProduct = async (searchQuery = "", category = "") => {
-  try {
-    const resp = await fetch(
-      `http://localhost:5000/api/products/getallproduct?searchQuery=${searchQuery}&category=${category}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          "auth-token": localStorage.getItem("token"),
-        },
-      }
-    );
-    const data = await resp.json();
-    setProducts(data);
-  } catch (error) {
-    console.error("Internal server error", error);
-  }
-};
+
+  const allProduct = async (searchQuery = "", category = "") => {
+    try {
+      const resp = await fetch(
+        `http://localhost:5000/api/products/getallproduct?searchQuery=${searchQuery}&category=${category}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "auth-token": localStorage.getItem("token"),
+          },
+        }
+      );
+      const data = await resp.json();
+      console.log("Fetched products:", data);
+      setProducts(data);
+      
+      // Update reducer state to keep them in sync
+      dispatch({
+        type: "SET_PRODUCTS",
+        payload: data,
+      });
+    } catch (error) {
+      console.error("Internal server error", error);
+    }
+  };
 
   const editProduct = async (id, updateData) => {
     const { title, description, price, instock, discount } = updateData;
@@ -98,15 +109,18 @@ const ProductState = (props) => {
         throw new Error("Failed to update product");
       }
       const data = await response.json();
-      console.log("data from fake store api", data);
+      console.log("Product updated successfully", data);
+      
+      // Refresh the products after editing
+      await allProduct();
+      
     } catch (error) {
       console.log("error in updating product", error);
+      throw error;
     }
   };
 
-  //delete product
-  const deleteProduct = async (id,e) => {
-    e.preventDefault();
+  const deleteProduct = async (id) => {
     try {
       const response = await fetch(`http://localhost:5000/api/products/deleteproduct/${id}`, {
         method: "DELETE",
@@ -120,6 +134,10 @@ const ProductState = (props) => {
       }
       const data = await response.json();
       console.log("product deleted successfully", data);
+      
+      // Refresh the products after deleting
+      await allProduct();
+      
     } catch (error) {
       console.log("error in deleting product", error);
       throw new Error("failed to delete product");
@@ -127,7 +145,16 @@ const ProductState = (props) => {
   };
 
   return (
-    <ProductContext.Provider value={{ state, articles, dispatch, deleteProduct, fetchData, allProduct, editProduct, product }}>
+    <ProductContext.Provider value={{ 
+      state, 
+      articles, 
+      dispatch, 
+      deleteProduct, 
+      fetchData, 
+      allProduct, 
+      editProduct, 
+      product 
+    }}>
       {props.children}
     </ProductContext.Provider>
   );
