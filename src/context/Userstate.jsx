@@ -20,6 +20,26 @@ const UserState = (props) => {
       console.error("Failed to fetch user:", error);
     }
   };
+  
+  const editUser = async (data) =>
+    {
+      try {
+        const resp = await fetch("http://localhost:5000/api/auth/edit", {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            "auth-token": localStorage.getItem("token"),
+            },
+            body: JSON.stringify(data),
+            });
+            const userData = await resp.json();
+            setUser(userData);
+            console.log("User data:", userData);
+            } catch (error) {
+              console.error("Failed to edit user:", error);
+              }
+              }
+
 
   // Run only once
   useEffect(() => {
@@ -28,7 +48,7 @@ const UserState = (props) => {
   }, []);
 
   return (
-    <UserContext.Provider value={{ user, setUser, getUser }}>
+    <UserContext.Provider value={{ user, setUser, getUser, editUser }}>
       {props.children}
     </UserContext.Provider>
   );

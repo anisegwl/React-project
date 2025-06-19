@@ -1,52 +1,32 @@
 import React, { useContext, useState } from "react";
-import productContext from "../context/ProductContext";
+import CartContext from "../context/CartContext";
 import "../styles/cartitems.css";
 import { ToastContainer, toast } from "react-toastify";
 import { MdDelete } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { FaLongArrowAltLeft } from "react-icons/fa";
-import defaultImage from "../assets/cod.jpg"
+import defaultImage from "../assets/cod.jpg";
 
 const CartItems = () => {
-  const context = useContext(productContext);
-  const {
-    state: { cart },
-    dispatch,
-  } = context;
-
-  // Proper subtotal calculation
-  const subtotal = cart.reduce((sum, item) => sum + item.qty * item.price, 0);
+  const { cart, addToCart, removeFromCart } = useContext(CartContext);
 
   const [promoInput, setPromoInput] = useState("");
   const [discount, setDiscount] = useState(0);
   const shipping = 89;
 
+  // Calculate subtotal
+  const subtotal = cart.reduce(
+    (sum, item) => sum + (item.product?.price || 0) * item.quantity,
+    0
+  );
+
   const applyPromoCode = () => {
-    const promoCodeDiscount = "FIRSTBUY";
-    if (promoInput.toUpperCase() === promoCodeDiscount) {
+    if (promoInput.toUpperCase() === "FIRSTBUY") {
       setDiscount(0.1);
-      toast.success("10% Discount applied", {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: false,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
+      toast.success("10% Discount applied");
     } else {
       setDiscount(0);
-      toast.error("Invalid promo code", {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: false,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
+      toast.error("Invalid promo code");
     }
   };
 
@@ -57,46 +37,41 @@ const CartItems = () => {
     <div className="cart-page">
       <div className="container">
         <h4>Your Cart</h4>
-
         <div className="product-container">
           <ul>
-            {cart &&
+            {cart.length === 0 ? (
+              <p>Your cart is empty</p>
+            ) : (
               cart.map((item) => (
-                <li key={item._id}>
+                <li key={item.product._id}>
                   <div className="row">
                     <div className="col-md-2 mt-3">
-                       <img
-                                         src={
-                                           item.image && item.image[0]
-                                             ? `http://localhost:5000/uploads/${item.image[0]}`
-                                             : defaultImage
-                                         }
-                                         className="card-img-top"
-                                         alt={item.title}
-                                       />
+                      <img
+                        src={
+                          item.product.image && item.product.image[0]
+                            ? `http://localhost:5000/uploads/${item.product.image[0]}`
+                            : defaultImage
+                        }
+                        className="card-img-top"
+                        alt={item.product.title}
+                      />
                     </div>
                     <div className="col-md-2">
-                      <h5>{item.title}</h5>
-                      <p>{item.description}</p>
+                      <h5>{item.product.title}</h5>
+                      <p>{item.product.description}</p>
                     </div>
                     <div className="col-md-2 mt-4">
-                      <h5>Price: Rs {item.price}</h5>
+                      <h5>Price: Rs {item.product.price}</h5>
                     </div>
                     <div className="col-md-2 mt-4">
                       <select
-                        value={item.qty}
-                        onChange={(e) =>
-                          dispatch({
-                            type: "UPDATE_CART_ITEM",
-                            payload: {
-                              _id: item._id,
-                              qty: Number(e.target.value),
-                            },
-                          })
-                        }
+                        value={item.quantity}
+                        onChange={(e) => {
+                          addToCart(item.product._id, Number(e.target.value));
+                        }}
                         className="form-control"
                       >
-                        {[...Array(item.instock).keys()].map((x) => (
+                        {[...Array(item.product.instock).keys()].map((x) => (
                           <option key={x + 1} value={x + 1}>
                             {x + 1}
                           </option>
@@ -107,27 +82,22 @@ const CartItems = () => {
                       <button
                         type="button"
                         className="btn btn-danger mt-4"
-                        onClick={() =>
-                          dispatch({
-                            type: "REMOVE_FROM_CART",
-                            payload: item,
-                          })
-                        }
+                        onClick={() => removeFromCart(item.product._id)}
                       >
                         <MdDelete />
                       </button>
                       <div className="product-total">
-                        <p>Total : Rs {item.price * item.qty}</p>
+                        <p>Total : Rs {item.product.price * item.quantity}</p>
                       </div>
                     </div>
                   </div>
                 </li>
-              ))}
+              ))
+            )}
           </ul>
         </div>
 
         <div className="row mt-4">
-          {/* Left Side - Promo & Back */}
           <div className="col-md-7">
             <div className="last-container">
               <div className="promo-section">
@@ -158,7 +128,6 @@ const CartItems = () => {
             </div>
           </div>
 
-          {/* Right Side - Summary */}
           <div className="col-md-5">
             <div className="summary-box">
               <div className="summary-row">

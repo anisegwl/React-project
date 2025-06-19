@@ -25,7 +25,8 @@ import Testimonial from "./components/Testimonial";
 import Header from "./components/layout/Header";
 import WomenProducts from "./components/WomenProducts";
 import MenProducts from "./components/MenProducts";
-
+import Profile from "./components/Profile";
+import CartState from "./context/CartState";
 function App() {
   const [text, setText] = useState("dark mode");
   const [mode, setMode] = useState("dark");
@@ -40,6 +41,7 @@ function App() {
 
   return (
     <>
+    <CartState>
     <UserState>
       <ProductState>
         <Router>
@@ -79,12 +81,14 @@ function App() {
              <Route path="/search/:searchQuery" element={<SearchResult />} />
              <Route path ='/products/:searchQuery' element={<About/>}/>
             <Route path="/payment" element={<Payment/>} />
+            <Route path="/profile" element={<Profile/>} />
           </Routes>
           
           <Footer/>
         </Router>
       </ProductState>
       </UserState>
+      </CartState>
     </>
   );
 }
