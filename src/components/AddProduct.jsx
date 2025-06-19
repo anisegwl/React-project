@@ -9,13 +9,12 @@ const AddProduct = () => {
     price: "",
     image: "",
     instock: "",
-    category:"",
+    category: "",
     discount: "",
   });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form submitted");
     const formData = new FormData();
     formData.append("title", product.title);
     formData.append("description", product.description);
@@ -26,6 +25,7 @@ const AddProduct = () => {
     if (product.image) {
       formData.append("myfile", product.image);
     }
+
     try {
       const response = await axios.post(
         "http://localhost:5000/api/products/addproduct",
@@ -45,11 +45,13 @@ const AddProduct = () => {
         price: "",
         image: "",
         instock: "",
-        category:"",
+        category: "",
         discount: "",
       });
+      alert("✅ Product added successfully!");
     } catch (error) {
       console.log(error);
+      alert("❌ Failed to add product");
     }
   };
 
@@ -84,6 +86,7 @@ const AddProduct = () => {
                   required
                 />
               </div>
+
               <div className="mb-3">
                 <label className="form-label">Description</label>
                 <input
@@ -95,6 +98,7 @@ const AddProduct = () => {
                   required
                 />
               </div>
+
               <div className="mb-3">
                 <label className="form-label">Price (Rs)</label>
                 <input
@@ -106,17 +110,22 @@ const AddProduct = () => {
                   required
                 />
               </div>
+
               <div className="mb-3">
                 <label className="form-label">Category</label>
-                <input
-                  type="text"
+                <select
                   name="category"
                   value={product.category}
                   onChange={handleChange}
                   className="form-control"
                   required
-                />
+                >
+                  <option value="">-- Select Category --</option>
+                  <option value="Men">Men</option>
+                  <option value="Women">Women</option>
+                </select>
               </div>
+
               <div className="mb-3">
                 <label className="form-label">In Stock</label>
                 <input
@@ -128,6 +137,7 @@ const AddProduct = () => {
                   required
                 />
               </div>
+
               <div className="mb-3">
                 <label className="form-label">Discount (Rs)</label>
                 <input
@@ -138,6 +148,7 @@ const AddProduct = () => {
                   className="form-control"
                 />
               </div>
+
               <div className="mb-3">
                 <label className="form-label">Image</label>
                 <input
@@ -147,6 +158,7 @@ const AddProduct = () => {
                   className="form-control"
                 />
               </div>
+
               <div className="text-end">
                 <button type="submit" className="btn-gradient">
                   Submit

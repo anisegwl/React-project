@@ -62,10 +62,10 @@ const Navbar = (props) => {
         <div className="navbar-center">
           <ul className="nav-links">
             <li className="nav-item">
-              <Link className="nav-link" to="/women">WOMEN</Link>
+              <Link className="nav-link" to="/women-products">WOMEN</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/men">MEN</Link>
+              <Link className="nav-link" to="/men-products">MEN</Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link" to="/gear">GEAR</Link>

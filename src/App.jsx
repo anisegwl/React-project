@@ -23,6 +23,8 @@ import UserState from "./context/Userstate";
 import SearchResult from "./components/SearchResult";
 import Testimonial from "./components/Testimonial";
 import Header from "./components/layout/Header";
+import WomenProducts from "./components/WomenProducts";
+import MenProducts from "./components/MenProducts";
 
 function App() {
   const [text, setText] = useState("dark mode");
@@ -69,10 +71,10 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/news" element={<News />} />
-            <Route path="/users" element={<Userlist />} />
+            <Route path="/women-products" element={<WomenProducts />} />
             <Route path="/:userId/:userName/:course" element={<Userdetail />} />
             <Route path="/cartitems" element={< CartItems />} />
-            <Route path="/testimonials" element={< Testimonial />} />
+            <Route path="/men-products" element={< MenProducts />} />
             <Route path="/add-product" element={<AddProduct />} />
              <Route path="/search/:searchQuery" element={<SearchResult />} />
              <Route path ='/products/:searchQuery' element={<About/>}/>

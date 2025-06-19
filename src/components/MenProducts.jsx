@@ -1,10 +1,11 @@
+
 import React, { useContext, useEffect, useState } from "react";
 import productContext from "../context/ProductContext";
 import "../styles/product.css";
 import EditProductModal from "./EditProdcutModal";
 import ProductCard from "./ProductCard";
 
-const About = () => {
+const MenProducts = () => {
   const {
     state: { cart },
     dispatch,
@@ -47,32 +48,35 @@ const About = () => {
     allProduct();
   }, []);
 
+  const menProducts = product.filter(
+    (item) => item.category && item.category.toLowerCase() === "men"
+  );
+
   return (
     <div className="container my-4">
       <h3 className="text-center mb-5" style={{ fontSize: "40px", color: "#4A5568" }}>
-        <b>Our Products</b>
+        <b>Men Collection</b>
       </h3>
       <div className="row">
-        {product &&
-          product.map((item) => (
-            <ProductCard
-              key={item._id}
-              item={item}
-              cart={cart}
-              dispatch={dispatch}
-              toggleMenu={toggleMenu}
-              menuVisible={menuVisible}
-              openEditModal={openEditModal}
-              handleDelete={handleDelete}
-              modalVisible={modalVisible}
-              selectedProduct={selectedProduct}
-              EditProductModal={EditProductModal}
-              editProduct={editProduct}
-            />
-          ))}
+        {menProducts.map((item) => (
+          <ProductCard
+            key={item._id}
+            item={item}
+            cart={cart}
+            dispatch={dispatch}
+            toggleMenu={toggleMenu}
+            menuVisible={menuVisible}
+            openEditModal={openEditModal}
+            handleDelete={handleDelete}
+            modalVisible={modalVisible}
+            selectedProduct={selectedProduct}
+            EditProductModal={EditProductModal}
+            editProduct={editProduct}
+          />
+        ))}
       </div>
     </div>
   );
 };
 
-export default About;
+export default MenProducts;

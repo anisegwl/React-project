@@ -61,24 +61,24 @@ const ProductState = (props) => {
       console.error(error);
     }
   };
-  const allProduct = async (searchQuery = "") => {
-    try {
-      const resp = await fetch(`http://localhost:5000/api/products/getallproduct?searchQuery=${searchQuery}`, {
-        method: "GET", //read
+ const allProduct = async (searchQuery = "", category = "") => {
+  try {
+    const resp = await fetch(
+      `http://localhost:5000/api/products/getallproduct?searchQuery=${searchQuery}&category=${category}`,
+      {
+        method: "GET",
         headers: {
           "Content-Type": "application/json",
           "auth-token": localStorage.getItem("token"),
         },
-      });
-      const data = await resp.json();
-      setProducts(data);
-
-      console.log("data from api ", data)
-    } catch (error) {
-      console.error("Internal server error", error);
-
-    }
-  };
+      }
+    );
+    const data = await resp.json();
+    setProducts(data);
+  } catch (error) {
+    console.error("Internal server error", error);
+  }
+};
 
   const editProduct = async (id, updateData) => {
     const { title, description, price, instock, discount } = updateData;
