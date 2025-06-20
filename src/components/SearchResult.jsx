@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import productContext from "../context/productContext";
 import dog from "../assets/card.jpg";
+import "../styles/product.css";
 
 const Searchresult = () => {
   const { searchQuery } = useParams();
