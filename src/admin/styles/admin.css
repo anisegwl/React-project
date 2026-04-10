@@ -1,0 +1,67 @@
+@import "tailwindcss";
+
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+  background: #f4f6f9;
+}
+
+.admin-sidebar {
+  width: 240px;
+  background: #111827;
+  color: #fff;
+  padding: 20px;
+}
+
+.admin-sidebar .logo {
+  margin-bottom: 30px;
+  font-size: 22px;
+}
+
+.admin-sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.admin-sidebar a {
+  color: #cbd5e1;
+  text-decoration: none;
+  padding: 10px;
+  border-radius: 6px;
+}
+
+.admin-sidebar a.active {
+  background: #2563eb;
+  color: #fff;
+}
+
+.admin-content {
+  flex: 1;
+  padding: 30px;
+}
+
+.admin-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.admin-card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.admin-card h3 {
+  font-size: 16px;
+  color: #555;
+}
+
+.admin-card p {
+  font-size: 28px;
+  font-weight: bold;
+  margin-top: 8px;
+}

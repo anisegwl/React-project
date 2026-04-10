@@ -1,259 +1,295 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
-import "../styles/Navbar.css";
-import "../styles/index.css";
-import { FaShoppingCart, FaUser, FaSearch } from "react-icons/fa";
-import logo from '../assets/logo.png'
+import { Link, useNavigate } from "react-router-dom";
+import { FaShoppingCart, FaUser, FaSearch, FaBars, FaTimes, FaHeart } from "react-icons/fa";
+import ProductContext from "../context/product/ProductContext";
+import UserContext from "../context/user/UserContext";
+import WishlistContext from "../context/wishlist/WishlistContext";
 
-// Context imports
-import ProductContext from "../context/ProductContext";
-import UserContext from "../context/UserContext";
-
-const Navbar = (props) => {
+const Navbar = ({ brandName = "Fitify" }) => {
   const navigate = useNavigate();
-  const location = useLocation();
   const [searchQuery, setSearchQuery] = useState("");
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [loadingUser, setLoadingUser] = useState(false);
+  const [error, setError] = useState(null);
 
-  // Access cart from ProductContext
   const productContext = useContext(ProductContext);
-  const { state: { cart } = {} } = productContext || {};
-
-  // Access user and getUser from UserContext
   const userContext = useContext(UserContext);
-  const { user, getUser } = userContext || {};
+  const wishlistContext = useContext(WishlistContext);
 
-  const token = localStorage.getItem("token");
+  // ✅ Correct cart access from ProductState I gave you
+  const cartCount = productContext?.cartCount ?? 0;
+  const wishlistCount = wishlistContext?.wishlist?.length ?? 0;
+
+  const user = userContext?.user || null;
+  const getUser = userContext?.getUser;
+
+  const token = typeof window !== "undefined" ? localStorage.getItem("token") : null;
 
   useEffect(() => {
-    if (token && !user) {
-      getUser();
-    }
-  }, [token, user]);
+    const fetchUser = async () => {
+      if (token && !user && getUser) {
+        try {
+          setLoadingUser(true);
+          setError(null);
+          await getUser();
+        } catch (err) {
+          console.error("Failed to fetch user:", err);
+          setError("Failed to load user data");
+        } finally {
+          setLoadingUser(false);
+        }
+      }
+    };
+
+    fetchUser();
+  }, [token, user, getUser]);
 
   const handleSearch = (e) => {
     e.preventDefault();
-    if (searchQuery.trim()) {
-      navigate(`/search/${searchQuery}`);
-    } else {
-      navigate("/");
+    try {
+      if (searchQuery.trim()) {
+        navigate(`/search/${encodeURIComponent(searchQuery.trim())}`);
+      } else {
+        navigate("/");
+      }
+      setMobileMenuOpen(false);
+    } catch (err) {
+      console.error("Search navigation error:", err);
+      setError("Search failed. Please try again.");
     }
   };
 
-  const handleChange = (e) => {
-    setSearchQuery(e.target.value);
-  };
-
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    navigate("/login");
+    try {
+      localStorage.removeItem("token");
+      navigate("/login");
+      setMobileMenuOpen(false);
+    } catch (err) {
+      console.error("Logout error:", err);
+      setError("Logout failed. Please try again.");
+    }
   };
 
   return (
-    <nav className="fitify-navbar">
-      <div className="navbar-container">
-        {/* Left Section - Logo */}
-        <div className="navbar-left">
-          <Link className="navbar-logo" to="/">
-            <img src={logo} alt={props.brandName} style={{height: 150, width:150, mixBlendMode:"multiply" }} className="logo-img" />
-          </Link>
-        </div>
-
-        {/* Center Section - Navigation Links */}
-        <div className="navbar-center">
-          <ul className="nav-links">
-            <li className="nav-item">
-              <Link className="nav-link" to="/women-products">WOMEN</Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/men-products">MEN</Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/accsessories">GEAR</Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/supplements">Supplements</Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/contact-us">Contact Us</Link>
-            </li>
-          </ul>
-        </div>
-
-        {/* Right Section - Actions */}
-        <div className="navbar-right">
-          {/* Search */}
-          <div className="search-container">
-            <form onSubmit={handleSearch} className="search-form">
-              <input
-                className="search-input"
-                type="search"
-                name="searchquery"
-                value={searchQuery}
-                onChange={handleChange}
-                placeholder="Search"
-                aria-label="Search"
-              />
-              <button className="search-btn" type="submit">
-                <FaSearch className="search-icon" />
-              </button>
-            </form>
+    <nav className="bg-gray-900 text-white shadow-md sticky top-0 z-50">
+      {/* Error Alert */}
+      {error && (
+        <div className="bg-red-50 border-l-4 border-red-500 p-4">
+          <div className="flex items-center justify-between">
+            <p className="text-red-700 text-sm">{error}</p>
+            <button onClick={() => setError(null)} className="text-red-500 hover:text-red-700">
+              <FaTimes />
+            </button>
           </div>
+        </div>
+      )}
 
-          {/* User Account */}
-          <div className="user-menu">
-            <div className="dropdown">
-              <button
-                className="user-btn"
-                type="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                <FaUser className="user-icon" />
-                <span className="user-text">
-                  {token && user ? user.name : "Sign In"}
-                </span>
-              </button>
-              <ul className="dropdown-menu dropdown-menu-end user-dropdown">
-                {token ? (
-                  <>
-                    <li className="dropdown-item user-greeting">
-                      {user ? `Hi, ${user.name}` : "Loading..."}
-                    </li>
-                    <li>
-                      <Link to="/profile" className="dropdown-item">
-                        Profile
-                      </Link>
-                    </li>
-                    <li>
-                      <button onClick={handleLogout} className="dropdown-item logout-btn">
-                        Logout
-                      </button>
-                    </li>
-                  </>
-                ) : (
-                  <>
-                    <li>
-                      <Link to="/login" className="dropdown-item">Login</Link>
-                    </li>
-                    <li>
-                      <Link to="/signup" className="dropdown-item">Sign Up</Link>
-                    </li>
-                  </>
-                )}
-              </ul>
-            </div>
-          </div>
-
-          {/* Shopping Cart */}
-          <div className="cart-container">
-            <Link to="/cartitems" className="cart-link">
-              <button className="cart-btn" type="button">
-                <FaShoppingCart className="cart-icon" />
-                <span className="cart-text">Cart</span>
-                {cart && cart.length > 0 && (
-                  <span className="cart-badge">
-                    {cart.length}
-                  </span>
-                )}
-              </button>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-20">
+          {/* Logo */}
+          <div className="flex-shrink-0">
+            <Link to="/" className="flex items-center">
+              <span className="text-2xl font-bold text-blue-500">{brandName}</span>
             </Link>
           </div>
 
-         
-        </div>
-
-        {/* Mobile Menu Toggle - for responsive design */}
-        <button
-          className="mobile-menu-toggle d-lg-none"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#mobileNav"
-          aria-controls="mobileNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="hamburger-line"></span>
-          <span className="hamburger-line"></span>
-          <span className="hamburger-line"></span>
-        </button>
-      </div>
-
-      {/* Mobile Navigation */}
-      <div className="collapse d-lg-none" id="mobileNav">
-        <div className="mobile-nav">
-          {/* Mobile Search */}
-          <div className="mobile-search">
-            <form onSubmit={handleSearch} className="mobile-search-form">
-              <input
-                className="mobile-search-input"
-                type="search"
-                name="searchquery"
-                value={searchQuery}
-                onChange={handleChange}
-                placeholder="Search"
-                aria-label="Search"
-              />
-              <button className="mobile-search-btn" type="submit">
-                <FaSearch className="search-icon" />
-              </button>
-            </form>
+          {/* Desktop Navigation */}
+          <div className="hidden lg:flex items-center space-x-8">
+            <Link to="/women-products" className="text-gray-300 hover:text-blue-500 font-medium transition-colors">
+              WOMEN
+            </Link>
+            <Link to="/men-products" className="text-gray-300 hover:text-blue-500 font-medium transition-colors">
+              MEN
+            </Link>
+            <Link to="/accsessories" className="text-gray-300 hover:text-blue-500 font-medium transition-colors">
+              GEAR
+            </Link>
+            <Link to="/supplements" className="text-gray-300 hover:text-blue-500 font-medium transition-colors">
+              Supplements
+            </Link>
+            <Link to="/contact-us" className="text-gray-300 hover:text-blue-500 font-medium transition-colors">
+              Contact Us
+            </Link>
           </div>
 
-          {/* Mobile Navigation Links */}
-          <ul className="mobile-nav-links">
-            <li><Link to="/women" className="mobile-nav-link" data-bs-toggle="collapse" data-bs-target="#mobileNav">WOMEN</Link></li>
-            <li><Link to="/men" className="mobile-nav-link" data-bs-toggle="collapse" data-bs-target="#mobileNav">MEN</Link></li>
-            <li><Link to="/gear" className="mobile-nav-link" data-bs-toggle="collapse" data-bs-target="#mobileNav">GEAR</Link></li>
-            <li><Link to="/supplements" className="mobile-nav-link" data-bs-toggle="collapse" data-bs-target="#mobileNav">Supplements</Link></li>
-            <li><Link to="/contact-us" className="mobile-nav-link" data-bs-toggle="collapse" data-bs-target="#mobileNav">Contact Us</Link></li>
-          </ul>
+          {/* Right Section */}
+          <div className="hidden lg:flex items-center space-x-4">
+            {/* Search */}
+            <form onSubmit={handleSearch} className="relative">
+              <input
+                type="search"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search..."
+                className="w-64 pl-10 pr-4 py-2 border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+              <button type="submit" className="absolute left-3 top-3">
+                <FaSearch className="text-gray-400" />
+              </button>
+            </form>
 
-          {/* Mobile User Actions */}
-          <div className="mobile-user-actions">
-            <div className="mobile-user-section">
-              <h6 className="mobile-section-title">Account</h6>
+            {/* User Menu */}
+            <div className="relative group">
+              <button className="flex items-center space-x-2 text-gray-300 hover:text-blue-500 transition-colors">
+                <FaUser />
+                <span className="font-medium">
+                  {loadingUser ? "Loading..." : token && user ? user.name : "Sign In"}
+                </span>
+              </button>
+
+              {/* ✅ Dropdown fixed colors */}
+              <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                {token ? (
+                  <div className="py-2">
+                    <div className="px-4 py-2 text-sm text-gray-700 border-b border-gray-100">
+                      {user ? `Hi, ${user.name}` : "Loading..."}
+                    </div>
+                    <Link
+                      to="/my-orders"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >
+                      My Orders
+                    </Link>
+
+                    <Link to="/profile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                      Profile
+                    </Link>
+
+                    <button
+                      onClick={handleLogout}
+                      className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >
+                      Logout
+                    </button>
+                  </div>
+                ) : (
+                  <div className="py-2">
+                    <Link to="/login" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                      Login
+                    </Link>
+                    <Link to="/signup" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                      Sign Up
+                    </Link>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Wishlist */}
+            <Link to="/wishlist" className="relative flex items-center space-x-2 text-gray-300 hover:text-pink-500 transition-colors">
+              <FaHeart className="text-xl" />
+              <span className="font-medium hidden xl:inline">Save</span>
+              {wishlistCount > 0 && (
+                <span className="absolute -top-2 -right-3 bg-pink-600 text-white text-xs font-bold rounded-full h-5 min-w-[20px] px-1 flex items-center justify-center">
+                  {wishlistCount}
+                </span>
+              )}
+            </Link>
+
+            {/* Cart */}
+            <Link to="/cartitems" className="relative flex items-center space-x-2 text-gray-300 hover:text-blue-500 transition-colors">
+              <FaShoppingCart className="text-xl" />
+              <span className="font-medium">Cart</span>
+
+              {cartCount > 0 && (
+                <span className="absolute -top-2 -right-3 bg-blue-600 text-white text-xs font-bold rounded-full h-5 min-w-[20px] px-1 flex items-center justify-center">
+                  {cartCount}
+                </span>
+              )}
+            </Link>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="lg:hidden text-gray-300 hover:text-blue-500"
+          >
+            {mobileMenuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Menu */}
+      {mobileMenuOpen && (
+        <div className="lg:hidden bg-white border-t">
+          <div className="px-4 py-4 space-y-4">
+            {/* Mobile Search */}
+            <form onSubmit={handleSearch} className="relative">
+              <input
+                type="search"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search..."
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+              <button type="submit" className="absolute left-3 top-3">
+                <FaSearch className="text-gray-400" />
+              </button>
+            </form>
+
+            {/* Mobile Links */}
+            <div className="space-y-2">
+              <Link to="/women-products" className="block py-2 text-gray-800 hover:text-blue-600 font-medium" onClick={() => setMobileMenuOpen(false)}>
+                WOMEN
+              </Link>
+              <Link to="/men-products" className="block py-2 text-gray-800 hover:text-blue-600 font-medium" onClick={() => setMobileMenuOpen(false)}>
+                MEN
+              </Link>
+              <Link to="/accsessories" className="block py-2 text-gray-800 hover:text-blue-600 font-medium" onClick={() => setMobileMenuOpen(false)}>
+                GEAR
+              </Link>
+              <Link to="/supplements" className="block py-2 text-gray-800 hover:text-blue-600 font-medium" onClick={() => setMobileMenuOpen(false)}>
+                Supplements
+              </Link>
+              <Link to="/contact-us" className="block py-2 text-gray-800 hover:text-blue-600 font-medium" onClick={() => setMobileMenuOpen(false)}>
+                Contact Us
+              </Link>
+            </div>
+
+            {/* Mobile User Actions */}
+            <div className="pt-4 border-t">
               {token ? (
-                <div className="mobile-user-info">
-                  <p className="mobile-user-greeting">
-                    {user ? `Hi, ${user.name}` : "Loading..."}
-                  </p>
-                  <Link to="/profile" className="mobile-action-link" data-bs-toggle="collapse" data-bs-target="#mobileNav">
-                    <FaUser className="mobile-action-icon" />
+                <div className="space-y-2">
+                  <p className="text-sm text-gray-600">{user ? `Hi, ${user.name}` : "Loading..."}</p>
+                  <Link to="/profile" className="block py-2 text-gray-800 hover:text-blue-600" onClick={() => setMobileMenuOpen(false)}>
                     Profile
                   </Link>
-                  <button onClick={handleLogout} className="mobile-action-link mobile-logout-btn">
+                  <button onClick={handleLogout} className="w-full text-left py-2 text-gray-800 hover:text-blue-600">
                     Logout
                   </button>
                 </div>
               ) : (
-                <div className="mobile-auth-links">
-                  <Link to="/login" className="mobile-action-link" data-bs-toggle="collapse" data-bs-target="#mobileNav">
-                    <FaUser className="mobile-action-icon" />
-                    Sign In
+                <div className="space-y-2">
+                  <Link to="/login" className="block py-2 text-gray-800 hover:text-blue-600" onClick={() => setMobileMenuOpen(false)}>
+                    Login
                   </Link>
-                  <Link to="/signup" className="mobile-action-link" data-bs-toggle="collapse" data-bs-target="#mobileNav">
+                  <Link to="/signup" className="block py-2 text-gray-800 hover:text-blue-600" onClick={() => setMobileMenuOpen(false)}>
                     Sign Up
                   </Link>
                 </div>
               )}
             </div>
 
-            <div className="mobile-cart-section">
-              <Link to="/cartitems" className="mobile-cart-link" data-bs-toggle="collapse" data-bs-target="#mobileNav">
-                <FaShoppingCart className="mobile-cart-icon" />
-                <span className="mobile-cart-text">Shopping Bag ({cart?.length || 0})</span>
-              </Link>
-            </div>
+            {/* Mobile Wishlist */}
+            <Link to="/wishlist" className="flex items-center justify-between py-3 border-t" onClick={() => setMobileMenuOpen(false)}>
+              <span className="text-gray-800 font-medium">Wishlist</span>
+              <span className="bg-pink-600 text-white text-sm font-bold rounded-full h-6 min-w-[24px] px-1 flex items-center justify-center">
+                {wishlistCount}
+              </span>
+            </Link>
+
+            {/* Mobile Cart */}
+            <Link to="/cartitems" className="flex items-center justify-between py-3 border-t border-gray-100" onClick={() => setMobileMenuOpen(false)}>
+              <span className="text-gray-800 font-medium">Shopping Cart</span>
+              <span className="bg-blue-600 text-white text-sm font-bold rounded-full h-6 min-w-[24px] px-1 flex items-center justify-center">
+                {cartCount}
+              </span>
+            </Link>
           </div>
         </div>
-      </div>
+      )}
     </nav>
   );
-};
-
-Navbar.defaultProps = {
-  brandName: "MyShop",
-  darkModeTxt: "light",
 };
 
 export default Navbar;

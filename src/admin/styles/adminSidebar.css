@@ -1,0 +1,39 @@
+
+.admin-sidebar {
+  width: 230px;
+  background: #111;
+  color: white;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.admin-sidebar h2 {
+  margin-bottom: 30px;
+}
+
+.admin-sidebar a {
+  display: block;
+  padding: 12px;
+  color: #ccc;
+  text-decoration: none;
+  border-radius: 6px;
+  margin-bottom: 5px;
+}
+
+.admin-sidebar a.active {
+  background: #2563eb;
+  color: white;
+}
+
+.admin-sidebar a:hover {
+  background: #1f2933;
+}
+
+.admin-logout-btn{
+    display: block;
+  padding: 12px;
+  color: #ccc;
+  text-decoration: none;
+  border-radius: 6px;
+  margin-bottom: 5px;
+}

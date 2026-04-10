@@ -1,79 +1,79 @@
-import { useState } from "react";
-import './styles/App.css';
-import "./styles/login.css";
-import Navbar from "./components/Navbar";
-import { toast, ToastContainer } from "react-toastify";
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
-import Footer from "./components/layout/Footer";
-import Home from "./components/Home";
-import Contact from "./components/contact";
-import Login from "./components/Login";
-import Signup from "./components/Signup";
-import Userlist from "./components/Userlist";
-import Userdetail from "./components/Userdetail";
-import About from "./components/About";
-import ProductState from "./context/ProductState";
-import News from "./components/News";
-import CartItems from "./components/CartItems";
-import AddProduct from "./components/AddProduct";
-import Payment from "./components/Payment";
-import UserState from "./context/Userstate";
-import SearchResult from "./components/SearchResult";
-import Testimonial from "./components/Testimonial";
-import Header from "./components/layout/Header";
-import WomenProducts from "./components/WomenProducts";
-import MenProducts from "./components/MenProducts";
-import Profile from "./components/Profile";
-import Supplements from "./components/Supplements";
-import Accsessories from "./components/Accsessories";
-import { useEffect } from "react";
+import "./styles/App.css";
 
-// Wrapper component to access location inside App
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+
+import Footer from "./components/layout/Footer";
+import Header from "./components/layout/Header";
+import Navbar from "./components/Navbar";
+
+// Pages
+import Home from "./components/pages/Home";
+import Contact from "./components/pages/Static/Contact";
+import Login from "./components/pages/Login";
+import Signup from "./components/pages/Signup";
+import CartItems from "./components/pages/CartItems";
+import Payment from "./components/pages/Payment";
+import SearchResult from "./components/pages/SearchResult";
+import WomenProducts from "./components/pages/Products/WomenProducts";
+import MenProducts from "./components/pages/Products/MenProducts";
+import Profile from "./components/pages/Profile";
+import Supplements from "./components/pages/Products/Supplements";
+import Accsessories from "./components/pages/Products/Accsessories";
+import Checkout from "./components/pages/Checkout";
+import OrderSuccess from "./components/pages/OrderSuccess";
+import ProductDetails from "./components/pages/ProductDetails";
+import Wishlist from "./components/pages/Wishlist";
+// Admin
+import AdminRoutes from "./admin/AdminRoutes";
+
+// Context
+import ProductState from "./context/product/ProductState";
+import UserState from "./context/user/Userstate";
+import { AuthProvider } from "./context/auth/AuthContext";
+import WishlistState from "./context/wishlist/WishlistState";
+import MyOrders from "./components/pages/MyOrders";
+
+// Wrapper
 const AppWrapper = () => {
   const location = useLocation();
-  const hideLayout = ["/login", "/signup"].includes(location.pathname);
 
-  const [text, setText] = useState("dark mode");
-  const [mode, setMode] = useState("dark");
-  const [alert, setAlert] = useState(null);
-
-  const showAlert = (type, message) => {
-    setAlert({ type, message });
-    setTimeout(() => setAlert(null), 2000);
-  };
-
-  const brandName = "UOIT-Appareals";
+  // Hide header/navbar/footer for admin + auth pages
+  const hideLayout =
+    location.pathname.startsWith("/admin") ||
+    ["/login", "/signup"].includes(location.pathname);
 
   return (
     <>
       {!hideLayout && <Header />}
-      {!hideLayout && (
-        <Navbar
-          mode={mode}
-          text={text}
-          brandName={brandName}
-          alert={alert}
-        />
-      )}
+      {!hideLayout && <Navbar />}
 
       <Routes>
+        {/* Public */}
         <Route path="/" element={<Home />} />
-        <Route path="/about-us" element={<About />} />
         <Route path="/contact-us" element={<Contact />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/news" element={<News />} />
+
+        {/* Products */}
         <Route path="/women-products" element={<WomenProducts />} />
-        <Route path="/:userId/:userName/:course" element={<Userdetail />} />
-        <Route path="/cartitems" element={<CartItems />} />
         <Route path="/men-products" element={<MenProducts />} />
-        <Route path="/add-product" element={<AddProduct />} />
-        <Route path="/search/:searchQuery" element={<SearchResult />} />
-        <Route path="/products/:searchQuery" element={<About />} />
-        <Route path="/payment" element={<Payment />} />
-        <Route path="/profile" element={<Profile />} />
         <Route path="/supplements" element={<Supplements />} />
         <Route path="/accsessories" element={<Accsessories />} />
+        <Route path="/search/:searchQuery" element={<SearchResult />} />
+        <Route path="/product/:id" element={<ProductDetails />} />
+        <Route path="/wishlist" element={<Wishlist />} />
+
+        {/* User */}
+        <Route path="/order-success/:id" element={<OrderSuccess />} />
+        <Route path="my-orders" element={<MyOrders />} />
+        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/cartitems" element={<CartItems />} />
+        <Route path="/payment" element={<Payment />} />
+        <Route path="/profile" element={<Profile />} />
+
+        {/* Admin */}
+        <Route path="/admin/*" element={<AdminRoutes />} />
       </Routes>
 
       {!hideLayout && <Footer />}
@@ -83,25 +83,18 @@ const AppWrapper = () => {
 
 function App() {
   return (
-    <UserState>
-      <ProductState>
-        <Router>
-          <ToastContainer
-            position="top-center"
-            autoClose={2000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick={false}
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme="light"
-          />
-          <AppWrapper />
-        </Router>
-      </ProductState>
-    </UserState>
+    <AuthProvider>
+      <UserState>
+        <WishlistState>
+          <ProductState>
+            <Router>
+              <ToastContainer position="top-center" autoClose={2000} theme="light" />
+              <AppWrapper />
+            </Router>
+          </ProductState>
+        </WishlistState>
+      </UserState>
+    </AuthProvider>
   );
 }
 

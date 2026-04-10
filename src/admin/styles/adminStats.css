@@ -1,0 +1,22 @@
+
+@import "tailwindcss";
+.admin-stats-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  min-width: 180px;
+  text-align: center;
+  box-shadow: 0px 2px 10px rgba(0,0,0,0.1);
+}
+
+.stat-title {
+  color: #555;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.stat-value {
+  font-size: 28px;
+  font-weight: bold;
+  color: #111;
+}

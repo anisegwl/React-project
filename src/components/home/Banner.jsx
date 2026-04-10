@@ -1,26 +1,26 @@
 import React, { useState, useEffect } from 'react';
-import specialEdition from '../assets/empty-gym.webp';
+import specialEdition from '../../assets/special.jpg';
 
-const Card = () => {
+const Banner = () => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
 
-  
+  // Preload image
   useEffect(() => {
     const img = new Image();
     img.src = specialEdition;
     img.onload = () => setImageLoaded(true);
     img.onerror = () => {
-      console.error('Failed to load card image');
+      console.error('Failed to load banner image');
       setImageError(true);
     };
   }, []);
 
   const handleLearnMore = () => {
     try {
-      
-      console.log('Navigating to Our Impact page');
-  
+      // Add your navigation logic here
+      console.log('Navigating to Special Edition page');
+      // Example: navigate('/special-edition') or window.location.href = '/special-edition'
     } catch (err) {
       console.error('Navigation error:', err);
       alert('Unable to navigate. Please try again.');
@@ -32,27 +32,7 @@ const Card = () => {
       <div className="bg-white rounded-lg shadow-lg overflow-hidden">
         <div className="grid grid-cols-1 md:grid-cols-2">
           
-          {/* Text Section - Left on desktop */}
-          <div className="flex items-center min-h-[400px] p-8 md:p-12">
-            <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                Our Impact
-              </h2>
-              <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-                Everything we do is built around performance, purpose, and progress. We empower people to train harder, 
-                live healthier, and reach their full potential backed by quality gear and clean supplements that make real impact.
-              </p>
-              <button 
-                onClick={handleLearnMore}
-                className="bg-gray-900 hover:bg-gray-800 text-white font-semibold px-6 py-3 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg active:scale-95 inline-flex items-center"
-              >
-                Learn More 
-                <span className="ml-2 transition-transform group-hover:translate-x-1">→</span>
-              </button>
-            </div>
-          </div>
-
-          {/* Image Section - Right on desktop */}
+          {/* Image Section - Left on desktop */}
           <div className="relative min-h-[400px] bg-gray-100">
             {!imageLoaded && !imageError && (
               <div className="absolute inset-0 flex items-center justify-center bg-gray-200">
@@ -73,12 +53,32 @@ const Card = () => {
 
             <img
               src={specialEdition}
-              alt="Our Impact - Empty gym interior"
+              alt="Special Edition - Model wearing puffer jacket"
               onError={() => setImageError(true)}
               className={`w-full h-full object-cover transition-opacity duration-300 ${
                 imageLoaded && !imageError ? 'opacity-100' : 'opacity-0'
               }`}
             />
+          </div>
+
+          {/* Text Section - Right on desktop */}
+          <div className="flex items-center min-h-[400px] p-8 md:p-12">
+            <div>
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                Special Edition
+              </h2>
+              <p className="text-lg text-gray-600 mb-6 leading-relaxed">
+                Our classic tanktop, reimagined. The Epiq SE offers a sleek triple black look and buttery soft outer fabric,
+                made using recycled plastic waste, including end-of-life tyres.
+              </p>
+              <button 
+                onClick={handleLearnMore}
+                className="bg-gray-900 hover:bg-gray-800 text-white font-semibold px-6 py-3 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg active:scale-95 inline-flex items-center"
+              >
+                Learn More 
+                <span className="ml-2 transition-transform group-hover:translate-x-1">→</span>
+              </button>
+            </div>
           </div>
 
         </div>
@@ -87,4 +87,4 @@ const Card = () => {
   );
 };
 
-export default Card;
+export default Banner;

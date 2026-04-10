@@ -1,0 +1,238 @@
+.admin-dashboard {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e8f0fe 50%, #f5f7fa 100%);
+  padding: 2rem;
+}
+
+.dashboard-header {
+  margin-bottom: 3rem;
+  animation: fadeIn 0.6s ease-out;
+}
+
+.dashboard-title {
+  font-size: 3rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #1a202c 0%, #2563eb 50%, #1a202c 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.5rem;
+}
+
+.dashboard-subtitle {
+  color: #6b7280;
+  font-size: 1.125rem;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  position: relative;
+  background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  overflow: hidden;
+  border: none;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 25px rgba(0, 0, 0, 0.15);
+}
+
+.stat-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.stat-card:hover::after {
+  opacity: 1;
+}
+
+.stat-card.blue::after {
+  background: linear-gradient(90deg, #3b82f6, #2563eb);
+}
+
+.stat-card.purple::after {
+  background: linear-gradient(90deg, #a855f7, #9333ea);
+}
+
+.stat-card.green::after {
+  background: linear-gradient(90deg, #10b981, #059669);
+}
+
+.stat-card.orange::after {
+  background: linear-gradient(90deg, #f97316, #ea580c);
+}
+
+.stat-icon-wrapper {
+  display: inline-flex;
+  padding: 0.75rem;
+  border-radius: 0.75rem;
+  margin-bottom: 1rem;
+  transition: transform 0.3s ease;
+}
+
+.stat-card:hover .stat-icon-wrapper {
+  transform: scale(1.1);
+}
+
+.stat-icon-wrapper.blue {
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+}
+
+.stat-icon-wrapper.purple {
+  background: linear-gradient(135deg, #a855f7, #9333ea);
+}
+
+.stat-icon-wrapper.green {
+  background: linear-gradient(135deg, #10b981, #059669);
+}
+
+.stat-icon-wrapper.orange {
+  background: linear-gradient(135deg, #f97316, #ea580c);
+}
+
+.stat-icon {
+  width: 24px;
+  height: 24px;
+  color: white;
+}
+
+.stat-title {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #6b7280;
+  margin-bottom: 0.25rem;
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+}
+
+.stat-trend {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.875rem;
+}
+
+.trend-icon {
+  width: 16px;
+  height: 16px;
+  color: #10b981;
+}
+
+.trend-value {
+  color: #059669;
+  font-weight: 500;
+}
+
+.trend-label {
+  color: #6b7280;
+}
+
+.quick-actions {
+  background: white;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.quick-actions-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 1rem;
+}
+
+.action-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.btn-primary-gradient {
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  border: none;
+  color: white;
+  font-weight: 500;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.btn-primary-gradient:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px rgba(37, 99, 235, 0.3);
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+}
+
+.btn-outline-custom {
+  background: white;
+  border: 2px solid #e5e7eb;
+  color: #374151;
+  font-weight: 500;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.btn-outline-custom:hover {
+  border-color: #3b82f6;
+  color: #2563eb;
+  background: white;
+}
+
+.loading-spinner {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e8f0fe 50%, #f5f7fa 100%);
+}
+
+.spinner-border-custom {
+  width: 3rem;
+  height: 3rem;
+  border-width: 0.25rem;
+  border-color: #3b82f6;
+  border-right-color: transparent;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-title {
+    font-size: 2rem;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+}

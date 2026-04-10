@@ -1,96 +1,32 @@
-import React, { useContext, useEffect, useState } from "react";
-import productContext from "../context/ProductContext";
-import "../styles/product.css";
-import EditProductModal from "./EditProdcutModal";
-import ProductCard from "./ProductCard";
+import React, { useContext, useEffect } from "react";
+import ProductContext from "../context/product/ProductContext";
+import ProductCard from "./common/ProductCard";
 
-const About = () => {
-  const {
-    state: { cart },
-    dispatch,
-    product,
-    allProduct,
-    editProduct,
-    deleteProduct,
-  } = useContext(productContext);
-
-  const [menuVisible, setMenuVisible] = useState({});
-  const [modalVisible, setModalVisible] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState(null);
-
-  const toggleMenu = (id) => {
-    setMenuVisible((prevState) => ({
-      ...prevState,
-      [id]: !prevState[id],
-    }));
-  };
-
-  const openEditModal = (product) => {
-    setSelectedProduct(product);
-    setModalVisible(true);
-  };
-
-  const closeEditModal = () => {
-    setModalVisible(false);
-    setSelectedProduct(null);
-  };
-
-  const saveEdit = async (updateData) => {
-    try {
-      await editProduct(selectedProduct._id, updateData);
-      closeEditModal();
-    } catch (error) {
-      console.error("Failed to edit product:", error);
-    }
-  };
-
-  const handleDelete = async (id) => {
-    try {
-      await deleteProduct(id);
-    } catch (error) {
-      console.error("Failed to delete product:", error);
-    }
-  };
+const OurProduct = () => {
+  const { products, getAllProducts, addToCart } =
+    useContext(ProductContext);
 
   useEffect(() => {
-    allProduct();
+    getAllProducts();
   }, []);
 
   return (
-    <div className="container my-4">
-      <h3 className="text-center mb-5" style={{ fontSize: "40px", color: "#4A5568" }}>
-        <b>Our Products</b>
+    <div className="container mx-auto my-8 px-4">
+      <h3 className="mb-8 text-center text-2xl font-bold">
+        Our Products
       </h3>
-      <div className="row">
-        {product &&
-          product.slice(0,4).map((item) => (
-            <ProductCard
-              key={item._id}
-              item={item}
-              cart={cart}
-              dispatch={dispatch}
-              toggleMenu={toggleMenu}
-              menuVisible={menuVisible}
-              openEditModal={openEditModal}
-              handleDelete={handleDelete}
-              modalVisible={modalVisible}
-              selectedProduct={selectedProduct}
-              EditProductModal={EditProductModal}
-              editProduct={editProduct}
-            />
-          ))}
+
+      <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        {products.slice(0, 8).map((item) => (
+          <ProductCard
+            key={item._id}
+            item={item}
+            onAddToCart={addToCart}
+          />
+        ))}
       </div>
-      
-      {modalVisible && (
-        <EditProductModal
-          visible={modalVisible}
-          product={selectedProduct}
-          onClose={closeEditModal}
-          onSave={saveEdit}
-        />
-      )}
     </div>
   );
 };
 
-export default About;
+export default OurProduct;
